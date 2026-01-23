@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="estilo-articulos.css"?>
+<articulos>
+    <articulo>
+        <nombre>Libro de Matemáticas</nombre>
+        <precio>25.50</precio>
+    </articulo>
+    <articulo>
+        <nombre>Cuaderno Escolar</nombre>
+        <precio>3.75</precio>
+    </articulo>
+    <articulo>
+        <nombre>Lápiz Profesional</nombre>
+        <precio>1.20</precio>
+    </articulo>
+    <articulo>
+        <nombre>Mochila Escolar</nombre>
+        <precio>45.00</precio>
+    </articulo>
+    <articulo>
+        <nombre>Calculadora Científica</nombre>
+        <precio>18.99</precio>
+    </articulo>
+</articulos>

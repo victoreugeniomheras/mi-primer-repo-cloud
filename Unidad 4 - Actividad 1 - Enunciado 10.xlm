@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+    <producto codigo="P001">
+        <nombre>Smartphone X100</nombre>
+        <descripcion>Teléfono inteligente con pantalla AMOLED de 6.5 pulgadas y 128GB de almacenamiento.</descripcion>
+        <precio>599.99</precio>
+        <categoria>Electrónica</categoria>
+        <disponibilidad>En stock</disponibilidad>
+        <imagen>https://tienda.com/images/smartphone_x100.jpg</imagen>
+    </producto>
+
+    <producto codigo="P002">
+        <nombre>Audífonos Bluetooth Pro</nombre>
+        <descripcion>Audífonos inalámbricos con cancelación de ruido y 20 horas de batería.</descripcion>
+        <precio>129.99</precio>
+        <categoria>Audio</categoria>
+        <disponibilidad>En stock</disponibilidad>
+        <imagen>https://tienda.com/images/audifonos_bt_pro.jpg</imagen>
+    </producto>
+
+    <producto codigo="P003">
+        <nombre>Portátil Gamer Z15</nombre>
+        <descripcion>Portátil con procesador Intel i7, 16GB RAM y tarjeta gráfica NVIDIA RTX 3060.</descripcion>
+        <precio>1499.00</precio>
+        <categoria>Computadoras</categoria>
+        <disponibilidad>Agotado</disponibilidad>
+        <imagen>https://tienda.com/images/portatil_gamer_z15.jpg</imagen>
+    </producto>
+
+    <producto codigo="P004">
+        <nombre>Cafetera Automática Espresso</nombre>
+        <descripcion>Cafetera de espresso automática con molinillo incorporado y 15 bares de presión.</descripcion>
+        <precio>249.50</precio>
+        <categoria>Hogar</categoria>
+        <disponibilidad>En stock</disponibilidad>
+        <imagen>https://tienda.com/images/cafetera_espresso.jpg</imagen>
+    </producto>
+
+    <producto codigo="P005">
+        <nombre>Reloj Inteligente FitPro</nombre>
+        <descripcion>Reloj inteligente con monitor de ritmo cardíaco, GPS y notificaciones de smartphone.</descripcion>
+        <precio>199.99</precio>
+        <categoria>Wearables</categoria>
+        <disponibilidad>En stock</disponibilidad>
+        <imagen>https://tienda.com/images/reloj_fitpro.jpg</imagen>
+    </producto>
+</productos>

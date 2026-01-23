@@ -1,0 +1,16 @@
+titulo {
+    background-color: lightblue; /* Fondo azul claro */
+    padding: 5px; /* Opcional: para que se vea mejor */
+}
+
+autor {
+    color: red; /* Texto rojo */
+}
+
+genero {
+    font-style: italic; /* Fuente cursiva */
+}
+
+anio {
+    font-size: 20px; /* Tamaño más grande */
+}

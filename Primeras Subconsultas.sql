@@ -1,0 +1,66 @@
+/*Ejercicio 1:
+Solo se pueden ver los productos para los que no hay
+ningun pedido.
+*/
+
+SELECT DESCRIPCION
+FROM PRODUCTOS
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM PEDIDOS
+    WHERE PEDIDOS.PRODUCTO_NO = PRODUCTOS.PRODUCTO_NO
+
+);
++-----------------------------+
+| DESCRIPCION                 |
++-----------------------------+
+| CAJA SEGURIDAD MOD B222     |
+| MODULO ORDENADOR MOD. ERGOS |
++-----------------------------+
+2 rows in set (0.002 sec)
+
+/*Ejercicio 2:
+VER LAS FECHAS EN LAS QUE GOMEZ HIZO PEDIDOS
+*/
+
+SELECT FECHA_PEDIDO
+FROM PEDIDOS
+WHERE CLIENTE_NO = (
+    SELECT CLIENTE_NO
+    FROM CLIENTES
+    WHERE NOMBRE LIKE '%GOMEZ%'
+);
++--------------+
+| FECHA_PEDIDO |
++--------------+
+| 1999-10-07   |
+| 1999-11-06   |
+| 2000-01-07   |
++--------------+
+3 rows in set (0.001 sec)
+/*QUIEN PIDIO ALGO EN ESAS FECHAS*/
+
+SELECT *
+FROM PEDIDOS
+WHERE FECHA_PEDIDO IN (
+    SELECT FECHA_PEDIDO
+    FROM PEDIDOS
+    WHERE CLIENTE_NO = (
+        SELECT CLIENTE_NO
+        FROM CLIENTES
+        WHERE NOMBRE LIKE '%GOMEZ%'
+    )
+)
+AND CLIENTE_NO <> (
+    SELECT CLIENTE_NO
+    FROM CLIENTES
+    WHERE NOMBRE LIKE '%GOMEZ%'
+);
+Empty set (0.001 sec)
+/*EMPTY QUIERE DECIR QUE NADIE PIDIO NADA EL MISMO DIA QUE 
+GOMEZ */
+
+
+/*Ejercicio 3:
+TENGO QUE CONTAR LOS EMPLEADOS DEL DEPARTAMENTO 20
+*/

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="nota">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="para" type="xsd:string"/>
+                <xsd:element name="de" type="xsd:string"/>
+                <xsd:element name="titulo" type="xsd:string"/>
+                <xsd:element name="contenido" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

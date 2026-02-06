@@ -32,3 +32,22 @@ Empty set (0.001 sec)
 /*Ejercicio 3:
 TENGO QUE CONTAR LOS EMPLEADOS DEL DEPARTAMENTO 20
 */
+MariaDB [curso]> select dep_no
+    -> from empleados
+    -> group by dep_no
+    -> having count(*) > (select count(*) from empleados where dep_no = 20);
++--------+
+| dep_no |
++--------+
+|     10 |
+|     30 |
++--------+
+2 rows in set (0.001 sec)
+
+/*Ejercicio 4:
+Cunado hay pasos que no conzco entonces es cuando hago las subconsultas
+ */
+
+SELECT apellido, salario
+FROM empleados
+WHERE salario > (SELECT AVG(salario)FROM empleados WHERE MONTH(fecha_alta) IN (10, 11, 12));

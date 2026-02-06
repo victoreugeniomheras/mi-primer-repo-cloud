@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alumnos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="alumnos.xsd">
+
+    <alumno id="1">
+        <nombre>Roberto</nombre>
+        <apellidos>García Moreno</apellidos>
+        <direccion>
+            <domicilio>Calle Andorra</domicilio>
+            <codigo_postal cp="28026"/>
+            <localidad>Madrid</localidad>
+            <provincia>Madrid</provincia>
+        </direccion>
+        <contactar>
+            <telf_casa>912356894</telf_casa>
+            <telf_movil>65894753</telf_movil>
+            <telf_trabajo>684795863</telf_trabajo>
+            <email href="r.garcia@gmail.com"/>
+        </contactar>
+    </alumno>
+
+    <alumno id="2">
+        <nombre>Pilar</nombre>
+        <apellidos>Fernandez Gil</apellidos>
+        <direccion>
+            <domicilio>Calle Saturno</domicilio>
+            <codigo_postal cp="08054"/>
+            <localidad>Barcelona</localidad>
+            <provincia>Barcelona</provincia>
+        </direccion>
+        <contactar>
+            <telf_casa>932568475</telf_casa>
+            <telf_movil>789654123</telf_movil>
+            <telf_trabajo>932598752</telf_trabajo>
+            <email href="pilar.fg@hotmail.com"/>
+        </contactar>
+    </alumno>
+
+</alumnos>

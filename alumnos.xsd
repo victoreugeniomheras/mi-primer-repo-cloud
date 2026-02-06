@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="alumnos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="alumno" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="nombre" type="xs:string"/>
+                            <xs:element name="apellidos" type="xs:string"/>
+                            <xs:element name="direccion">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="domicilio" type="xs:string"/>
+                                        <xs:element name="codigo_postal">
+                                            <xs:complexType>
+                                                <xs:attribute name="cp" type="xs:string" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="localidad" type="xs:string"/>
+                                        <xs:element name="provincia" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="contactar">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="telf_casa" type="xs:string"/>
+                                        <xs:element name="telf_movil" type="xs:string"/>
+                                        <xs:element name="telf_trabajo" type="xs:string"/>
+                                        <xs:element name="email">
+                                            <xs:complexType>
+                                                <xs:attribute name="href" type="xs:string" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

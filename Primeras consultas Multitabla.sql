@@ -67,3 +67,53 @@ from departamentos d
 left join empleados e
 on d.dep_no = e.dep_no
 where emp_no is null;
+
+/*4. Muestra el apellido de los empleados y el nombre de los clientes que tienen asignados
+como "Vendedor No". Solo muestra empleados que efectivamente sean
+vendedores de algún cliente.*/
+MariaDB [curso]> select apellido, nombre
+    -> from empleados e
+    -> inner join clientes c
+    -> on e.emp_no = c.vendedor_no;
++----------+-------------------------+
+| apellido | nombre                  |
++----------+-------------------------+
+| ALONSO   | DISTRIBUCIONES GOMEZ    |
+| MARTIN   | LOGITRONICA S.L         |
+| CALVO    | INDUSTRIAS LACTEAS S.A. |
+| MARTIN   | TALLERES ESTESO S.A.    |
+| ALONSO   | EDICIONES SANZ          |
+| MARTIN   | SIGNOLOGIC S.A.         |
+| CALVO    | MARTIN Y ASOCIADOS S.L. |
+| MARTIN   | MANUFACTURAS ALI S.A.   |
++----------+-------------------------+
+8 rows in set (0.001 sec)
+
+/*5. Muestra todos los clientes de la base de datos y el número de pedido de las compras que
+hayan realizado. Los clientes que no han comprado deben aparecer también.*/
+
+select cli.* , pedido_no
+from clientes cli
+left outer join pedidos pe on cli.cliente_no = pe.cliente_no;
+
+/*6. Localiza el nombre y localidad de los clientes que nunca han realizado un pedido para
+enviarles una oferta de bienvenida.*/
+
+select cli.*, pedido_no
+from clientes cli
+left outer join pedidos p on cli.cliente_no = p.cliente_no
+where pedido_no is null;
+
+/*7. Lista todos los productos (descripción) y las unidades vendidas en cada pedido. Deben
+aparecer incluso los productos que no se han vendido nunca.*/
+
+select pro.*, unidades
+from productos pro
+left outer join pedidos pe on pro.producto_no = pe.producto_no;
+
+/*8.   Muestra la descripción de los productos que no aparecen en ninguna línea de pedido
+(productos que no tienen salida).*/
+select pro.* , pedido_no
+from productos pro
+left outer pedidos pe on pro.producto_no = pe.producto_no;
+/*No terminada*/

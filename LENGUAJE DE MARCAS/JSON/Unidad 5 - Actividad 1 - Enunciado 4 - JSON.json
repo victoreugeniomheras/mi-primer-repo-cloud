@@ -1,0 +1,68 @@
+{
+  "directorio": {
+    "contactos": [
+      {
+        "nombreCompleto": "Juan Pérez",
+        "telefono": "+123456789",
+        "correoElectronico": "juan@example.com",
+        "ciudadResidencia": "Ciudad A",
+        "direcciones": [
+          {
+            "calle": "Calle 123",
+            "ciudad": "Ciudad A",
+            "pais": "País A"
+          },
+          {
+            "calle": "Avenida Central",
+            "ciudad": "Ciudad A",
+            "pais": "País A"
+          }
+        ]
+      },
+      {
+        "nombreCompleto": "María García",
+        "telefono": "+987654321",
+        "correoElectronico": "maria@example.com",
+        "ciudadResidencia": "Ciudad B",
+        "direcciones": [
+          {
+            "calle": "Calle 456",
+            "ciudad": "Ciudad B",
+            "pais": "País B"
+          }
+        ]
+      },
+      {
+        "nombreCompleto": "Carlos López",
+        "telefono": "+555555555",
+        "correoElectronico": "carlos@example.com",
+        "ciudadResidencia": "Ciudad C",
+        "direcciones": [
+          {
+            "calle": "Calle 789",
+            "ciudad": "Ciudad C",
+            "pais": "País C"
+          }
+        ]
+      },
+      {
+        "nombreCompleto": "Ana Martínez",
+        "telefono": "+999999999",
+        "correoElectronico": "ana@example.com",
+        "ciudadResidencia": "Ciudad A",
+        "direcciones": [
+          {
+            "calle": "Calle 987",
+            "ciudad": "Ciudad A",
+            "pais": "País A"
+          },
+          {
+            "calle": "Plaza Mayor",
+            "ciudad": "Ciudad A",
+            "pais": "País A"
+          }
+        ]
+      }
+    ]
+  }
+}

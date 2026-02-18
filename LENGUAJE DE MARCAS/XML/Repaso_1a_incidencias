@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE departamentoIT [
+
+    <!-- ELEMENTO RAÍZ -->
+    <!ELEMENT departamentoIT (incidencia+)>
+    <!ATTLIST departamentoIT
+        empresa CDATA #REQUIRED>
+
+    <!-- INCIDENCIA -->
+    <!ELEMENT incidencia (fecha, equipo, tipo, descripcion, tecnico, resuelta)>
+    <!ATTLIST incidencia
+        id CDATA #REQUIRED
+        prioridad (alta | media | baja) #REQUIRED>
+
+    <!-- ELEMENTOS HIJOS -->
+    <!ELEMENT fecha (#PCDATA)>
+    <!ELEMENT equipo (#PCDATA)>
+    <!ELEMENT tipo (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+    <!ELEMENT tecnico (#PCDATA)>
+    <!ELEMENT resuelta (#PCDATA)>
+
+]>
+
+<departamentoIT empresa="TechSolutions">
+
+    <incidencia id="1" prioridad="alta">
+        <fecha>2026-02-10</fecha>
+        <equipo>PC-Oficina-01</equipo>
+        <tipo>hardware</tipo>
+        <descripcion>No enciende el equipo</descripcion>
+        <tecnico>Juan Pérez</tecnico>
+        <resuelta>no</resuelta>
+    </incidencia>
+
+    <incidencia id="2" prioridad="media">
+        <fecha>2026-02-12</fecha>
+        <equipo>Servidor-02</equipo>
+        <tipo>red</tipo>
+        <descripcion>Pérdida de conexión intermitente</descripcion>
+        <tecnico>María García</tecnico>
+        <resuelta>si</resuelta>
+    </incidencia>
+
+</departamentoIT>

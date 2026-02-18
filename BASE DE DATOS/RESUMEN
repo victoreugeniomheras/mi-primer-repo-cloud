@@ -1,0 +1,55 @@
+🧠 RESUMEN RAPIDO:
+
+Si veo en el enunciado…	            Pienso en…
+Total, media, máximo	            GROUP BY
+Solo los que tengan	                INNER JOIN
+Que no tengan	                    LEFT JOIN + IS NULL
+Mayor que la media	                Subconsulta
+Filtrar grupos	                    HAVING
+Ordenar	                            ORDER BY
+Primeros 5	                        LIMIT
+
+
+- Agrupacion (group by) = totalidar, promedio, media. (EJ: ORDER BY salario DESC)
+- Subconsulta (EJ: where salario = (select etc)) = datos desconocidos y me hac falta para un filtrado.
+    - Los campos a mostar son solo de una tabla
+
+- Where -> Filtrar filas (WHERE salario > 1500 (EJ: =, <> , > , <, ,>= , <= , BETWEEN, IN , LIKE, IS NULL))
+- HAVING → Filtrar grupos: (SELECT dep_no, COUNT(*)
+                            FROM empleados
+                            GROUP BY dep_no
+                            HAVING COUNT(*) > 2;
+- 📌 Diferencia clave:
+    WHERE → filtra filas
+    HAVING → filtra grupos  
+
+- Limitar resultados (LIMIT 5)
+
+
+- Unir tablas: INNER JOIN → Solo coincidencias (SELECT e.apellido, d.dnombre 
+                                                FROM empleados e INNER JOIN departamentos d
+                                                ON e.dep_no = d.dep_no;)
+- LEFT JOIN → Todos los de la izquierda (SELECT e.apellido, c.nombre
+                                        FROM empleados e LEFT JOIN clientes c
+                                        ON e.emp_no = c.vendedor_no;)
+
+- Funciones de agregación: (COUNT()	Cuenta
+                            SUM()	Suma
+                            AVG()	Media
+                            MAX()	Máximo
+                            MIN()   Minimo)
+
+- Alias → Simplificar nombres: (FROM empleados e)
+- DISTINCT → Quitar duplicados: (SELECT DISTINCT dep_no FROM empleados;)
+
+select *
+from departamentos
+where dep_no in (select dep_no from empleados group by dep_no having count(*)
+> (select count(emp_no)from empleados where dep_no = 20));
+
+JUAN ANDRES
+
+multitablas = datos a mostrar son de tablas diferente, si quiero informacion comun, si quiero informacion no comun o información común y no comun 
+ informacion comun: inner 
+ informacion no comun : outer (left, right)
+ informacion común y no comun: outer (left, right) where (valor) is null

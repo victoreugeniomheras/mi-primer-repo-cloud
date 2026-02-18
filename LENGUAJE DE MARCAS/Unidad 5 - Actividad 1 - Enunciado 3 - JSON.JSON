@@ -1,0 +1,27 @@
+{
+  "ciudades": {
+    "ciudad": [
+      {
+        "nombre": "Nueva Delhi",
+        "pais": {
+          "nombre": "India",
+          "continente": "Asia"
+        }
+      },
+      {
+        "nombre": "Lisboa",
+        "pais": {
+          "nombre": "Portugal",
+          "continente": "Europa"
+        }
+      },
+      {
+        "nombre": "El Cairo",
+        "pais": {
+          "nombre": "Egipto",
+          "continente": "África"
+        }
+      }
+    ]
+  }
+}

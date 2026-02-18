@@ -139,16 +139,16 @@ MariaDB [curso]> select de.dnombre, em.apellido, nombre
 +---------+----------+-------------------------+
 8 rows in set (0.000 sec)
 
-/* 8. Nombre del departamento y apellido de los empleados cumpliendo que los departamentos tengan empleados y 
+/* DE CLASE : 8. Nombre del departamento y apellido de los empleados cumpliendo que los departamentos tengan empleados y 
 ademas los empleados no tengan clientes asignados */
 
-MariaDB [curso]> SELECT d.DNOMBRE, e.APELLIDO
-    -> FROM DEPARTAMENTOS d
-    -> INNER JOIN EMPLEADOS e
-    ->     ON d.DEP_NO = e.DEP_NO
-    -> LEFT JOIN CLIENTES c
-    ->     ON e.EMP_NO = c.VENDEDOR_NO
-    -> WHERE c.CLIENTE_NO IS NULL;
+MariaDB [curso]> SELECT d.DNOMBRE, e.APELLIDO, d.dep_no, emp_no, nombre
+FROM DEPARTAMENTOS d
+INNER JOIN EMPLEADOS e
+    ON d.DEP_NO = e.DEP_NO
+LEFT JOIN CLIENTES c
+    ON e.EMP_NO = c.VENDEDOR_NO
+WHERE c.CLIENTE_NO IS NULL;
 +---------------+----------+
 | DNOMBRE       | APELLIDO |
 +---------------+----------+
@@ -160,5 +160,55 @@ MariaDB [curso]> SELECT d.DNOMBRE, e.APELLIDO
 | VENTAS        | GARRIDO  |
 +---------------+----------+
 6 rows in set (0.003 sec)
+
+
+- Agrupacion (group by) = totalidar, promedio, media. (EJ: ORDER BY salario DESC)
+- Subconsulta (EJ: where salario = (select etc)) = datos desconocidos y me hac falta para un filtrado.
+    - Los campos a mostar son solo de una tabla
+
+
+
+- Where -> Filtrar filas (WHERE salario > 1500 (EJ: =, <> , > , <, ,>= , <= , BETWEEN, IN , LIKE, IS NULL))
+- HAVING → Filtrar grupos: (SELECT dep_no, COUNT(*)
+                            FROM empleados
+                            GROUP BY dep_no
+                            HAVING COUNT(*) > 2;
+- 📌 Diferencia clave:
+    WHERE → filtra filas
+    HAVING → filtra grupos  
+
+- Limitar resultados (LIMIT 5)
+
+
+- Unir tablas: INNER JOIN → Solo coincidencias (SELECT e.apellido, d.dnombre 
+                                                FROM empleados e INNER JOIN departamentos d
+                                                ON e.dep_no = d.dep_no;)
+- LEFT JOIN → Todos los de la izquierda (SELECT e.apellido, c.nombre
+                                        FROM empleados e LEFT JOIN clientes c
+                                        ON e.emp_no = c.vendedor_no;)
+
+- Funciones de agregación: (COUNT()	Cuenta
+                            SUM()	Suma
+                            AVG()	Media
+                            MAX()	Máximo
+                            MIN()   Minimo)
+
+- Alias → Simplificar nombres: (FROM empleados e)
+- DISTINCT → Quitar duplicados: (SELECT DISTINCT dep_no FROM empleados;)
+
+🧠 RESUMEN RAPIDO:
+
+Si veo en el enunciado…	            Pienso en…
+Total, media, máximo	            GROUP BY
+Solo los que tengan	                INNER JOIN
+Que no tengan	                    LEFT JOIN + IS NULL
+Mayor que la media	                Subconsulta
+Filtrar grupos	                    HAVING
+Ordenar	                            ORDER BY
+Primeros 5	                        LIMIT
+
+
+
+
 
 

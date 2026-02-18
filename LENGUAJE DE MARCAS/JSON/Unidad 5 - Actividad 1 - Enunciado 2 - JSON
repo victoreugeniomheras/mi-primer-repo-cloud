@@ -1,0 +1,51 @@
+{
+  "tienda": {
+    "productos": [
+      {
+        "codigo": "P001",
+        "nombre": "Camiseta de manga corta",
+        "descripcion": "Camiseta de algodón para hombre, color negro",
+        "precio": 19.99,
+        "categoria": "Ropa",
+        "disponibilidad": "En stock",
+        "imagen": "https://ejemplo.com/imagen1.jpg"
+      },
+      {
+        "codigo": "P002",
+        "nombre": "Pantalón vaquero",
+        "descripcion": "Pantalón vaquero para mujer, corte recto",
+        "precio": 39.99,
+        "categoria": "Ropa",
+        "disponibilidad": "En stock",
+        "imagen": "https://ejemplo.com/imagen2.jpg"
+      },
+      {
+        "codigo": "P003",
+        "nombre": "Zapatillas deportivas",
+        "descripcion": "Zapatillas deportivas unisex, color blanco",
+        "precio": 59.99,
+        "categoria": "Zapatos",
+        "disponibilidad": "Agotado",
+        "imagen": "https://ejemplo.com/imagen3.jpg"
+      },
+      {
+        "codigo": "P004",
+        "nombre": "Bolso de mano",
+        "descripcion": "Bolso de mano para mujer, estilo elegante",
+        "precio": 29.99,
+        "categoria": "Accesorios",
+        "disponibilidad": "En stock",
+        "imagen": "https://ejemplo.com/imagen4.jpg"
+      },
+      {
+        "codigo": "P005",
+        "nombre": "Reloj de pulsera",
+        "descripcion": "Reloj de pulsera unisex, correa de acero inoxidable",
+        "precio": 79.99,
+        "categoria": "Relojes",
+        "disponibilidad": "En stock",
+        "imagen": "https://ejemplo.com/imagen5.jpg"
+      }
+    ]
+  }
+}

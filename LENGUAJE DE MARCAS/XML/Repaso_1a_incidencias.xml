@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE departamentoIT [
-
-    <!-- ELEMENTO RAÍZ -->
-    <!ELEMENT departamentoIT (incidencia+)>
-    <!ATTLIST departamentoIT
-        empresa CDATA #REQUIRED>
-
-    <!-- INCIDENCIA -->
-    <!ELEMENT incidencia (fecha, equipo, tipo, descripcion, tecnico, resuelta)>
-    <!ATTLIST incidencia
-        id CDATA #REQUIRED
-        prioridad (alta | media | baja) #REQUIRED>
-
-    <!-- ELEMENTOS HIJOS -->
-    <!ELEMENT fecha (#PCDATA)>
-    <!ELEMENT equipo (#PCDATA)>
-    <!ELEMENT tipo (#PCDATA)>
-    <!ELEMENT descripcion (#PCDATA)>
-    <!ELEMENT tecnico (#PCDATA)>
-    <!ELEMENT resuelta (#PCDATA)>
-
-]>
-
-<departamentoIT empresa="TechSolutions">
+<departamentoIT
+    empresa="TechSolutions"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="Repaso_1b.xsd">
 
     <incidencia id="1" prioridad="alta">
         <fecha>2026-02-10</fecha>

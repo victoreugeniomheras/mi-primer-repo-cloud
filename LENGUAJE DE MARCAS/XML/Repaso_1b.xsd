@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- ELEMENTO RAÍZ -->
+    <xs:element name="departamentoIT">
+        <xs:complexType>
+            <xs:sequence>
+
+                <!-- MÍNIMO 2 INCIDENCIAS -->
+                <xs:element name="incidencia" minOccurs="2" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <!-- ORDEN OBLIGATORIO -->
+                            <xs:element name="fecha" type="xs:date"/>
+                            <xs:element name="equipo" type="xs:string"/>
+
+                            <!-- tipo restringido -->
+                            <xs:element name="tipo">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="hardware"/>
+                                        <xs:enumeration value="software"/>
+                                        <xs:enumeration value="red"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <xs:element name="descripcion" type="xs:string"/>
+                            <xs:element name="tecnico" type="xs:string"/>
+
+                            <!-- resuelta restringido -->
+                            <xs:element name="resuelta">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="si"/>
+                                        <xs:enumeration value="no"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                        </xs:sequence>
+
+                        <!-- ATRIBUTOS OBLIGATORIOS -->
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+
+                        <xs:attribute name="prioridad" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="alta"/>
+                                    <xs:enumeration value="media"/>
+                                    <xs:enumeration value="baja"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+
+            <!-- atributo empresa obligatorio -->
+            <xs:attribute name="empresa" type="xs:string" use="required"/>
+
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

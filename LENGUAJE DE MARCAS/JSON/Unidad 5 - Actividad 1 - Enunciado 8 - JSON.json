@@ -1,0 +1,70 @@
+{
+  "pedidos": [
+    {
+      "numero_pedido": 1001,
+      "fecha": "2026-03-10",
+      "estado": "pendiente",
+      "modalidad": "online",
+      "cliente": {
+        "nombre": "Juan",
+        "apellidos": "Pérez Gómez",
+        "email": "juan.perez@email.com",
+        "direccion": {
+          "calle": "Calle Mayor",
+          "numero": 15,
+          "ciudad": "Madrid",
+          "codigo_postal": "28013"
+        }
+      },
+      "productos": [
+        {
+          "nombre": "Ratón inalámbrico",
+          "categoria": "Informática",
+          "precio": 19.99,
+          "cantidad": 2
+        },
+        {
+          "nombre": "Teclado mecánico",
+          "categoria": "Informática",
+          "precio": 59.95,
+          "cantidad": 1
+        }
+      ],
+      "total": 99.93,
+      "envio_urgente": true
+    },
+    {
+      "numero_pedido": 1002,
+      "fecha": "2026-03-11",
+      "estado": "enviado",
+      "modalidad": "presencial",
+      "cliente": {
+        "nombre": "Laura",
+        "apellidos": "Martínez Ruiz",
+        "email": "laura.martinez@email.com",
+        "direccion": {
+          "calle": "Avenida del Puerto",
+          "numero": 42,
+          "ciudad": "Valencia",
+          "codigo_postal": "46021"
+        }
+      },
+      "productos": [
+        {
+          "nombre": "Auriculares Bluetooth",
+          "categoria": "Electrónica",
+          "precio": 34.50,
+          "cantidad": 1
+        },
+        {
+          "nombre": "Cargador USB-C",
+          "categoria": "Accesorios",
+          "precio": 14.99,
+          "cantidad": 2
+        }
+      ],
+      "total": 64.48,
+      "envio_urgente": false
+    }
+  ]
+}

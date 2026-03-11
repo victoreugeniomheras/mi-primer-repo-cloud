@@ -1,0 +1,55 @@
+{
+  "contenedores": [
+    {
+      "nombre": "Grande",
+      "acepta_envases": ["Grande ancho", "Grande alto"]
+    },
+    {
+      "nombre": "Mediano",
+      "acepta_envases": ["Mediano ancho", "Mediano alto", "Pequeño"]
+    },
+    {
+      "nombre": "Vertical",
+      "acepta_envases": ["Grande alto", "Mediano alto"]
+    }
+  ],
+  "envases": [
+    {
+      "nombre": "Grande ancho",
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["Agua", "Leche", "Aceite", "Vinagre"]
+    },
+    {
+      "nombre": "Grande alto",
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["Agua", "Leche", "Aceite", "Vinagre"]
+    },
+    {
+      "nombre": "Mediano ancho",
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["Agua", "Leche", "Aceite", "Vinagre"]
+    },
+    {
+      "nombre": "Mediano alto",
+      "tipo": "resistente a corrosivos",
+      "liquidos_permitidos": ["Lejía", "Amoniaco", "Aguarrás", "Gasolina", "Alcohol", "Jabón"]
+    },
+    {
+      "nombre": "Pequeño",
+      "tipo": "resistente a corrosivos",
+      "liquidos_permitidos": ["Lejía", "Amoniaco", "Aguarrás", "Gasolina", "Alcohol", "Jabón"]
+    }
+  ],
+  "liquidos": [
+    "Agua",
+    "Leche",
+    "Lejía",
+    "Amoniaco",
+    "Jabón",
+    "Aguarrás",
+    "Gasolina",
+    "Aceite",
+    "Vinagre",
+    "Alcohol"
+  ]
+}

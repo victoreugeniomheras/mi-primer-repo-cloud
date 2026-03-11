@@ -1,0 +1,42 @@
+{
+  "alumnos": [
+    {
+      "id": 1,
+      "nombre": "Roberto",
+      "apellidos": "García Moreno",
+      "direccion": {
+        "domicilio": "Calle Andorra",
+        "codigo_postal": {
+          "cp": "28026"
+        },
+        "localidad": "Madrid",
+        "provincia": "Madrid"
+      },
+      "contactar": {
+        "telf_casa": "912356894",
+        "telf_movil": "65894753",
+        "telf_trabajo": "684795863",
+        "email": "r.garcia@gmail.com"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Pilar",
+      "apellidos": "Fernandez Gil",
+      "direccion": {
+        "domicilio": "Calle Saturno",
+        "codigo_postal": {
+          "cp": "08054"
+        },
+        "localidad": "Barcelona",
+        "provincia": "Barcelona"
+      },
+      "contactar": {
+        "telf_casa": "932568475",
+        "telf_movil": "789654123",
+        "telf_trabajo": "932598752",
+        "email": "pilar.fg@hotmail.com"
+      }
+    }
+  ]
+}

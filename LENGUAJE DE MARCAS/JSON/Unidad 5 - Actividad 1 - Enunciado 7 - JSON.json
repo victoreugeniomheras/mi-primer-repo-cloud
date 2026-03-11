@@ -1,0 +1,68 @@
+{
+  "cursos": [
+    {
+      "nombre": "Programación en Java",
+      "codigo": "PRG101",
+      "duracion_horas": 120,
+      "modalidad": "presencial",
+      "profesor": {
+        "nombre": "Carlos Martínez",
+        "email": "carlos.martinez@academia.com",
+        "departamento": "Programación"
+      },
+      "alumnos": [
+        {
+          "nombre": "Ana",
+          "apellidos": "Gómez Ruiz",
+          "edad": 20,
+          "repite": false
+        },
+        {
+          "nombre": "Luis",
+          "apellidos": "Pérez Díaz",
+          "edad": 22,
+          "repite": true
+        },
+        {
+          "nombre": "Marta",
+          "apellidos": "Sánchez López",
+          "edad": 21,
+          "repite": false
+        }
+      ],
+      "activo": true
+    },
+    {
+      "nombre": "Diseño Web",
+      "codigo": "WEB202",
+      "duracion_horas": 90,
+      "modalidad": "online",
+      "profesor": {
+        "nombre": "Laura Fernández",
+        "email": "laura.fernandez@academia.com",
+        "departamento": "Diseño"
+      },
+      "alumnos": [
+        {
+          "nombre": "Pedro",
+          "apellidos": "Navarro Gil",
+          "edad": 23,
+          "repite": false
+        },
+        {
+          "nombre": "Lucía",
+          "apellidos": "Ramírez Torres",
+          "edad": 19,
+          "repite": false
+        },
+        {
+          "nombre": "Jorge",
+          "apellidos": "Castro Molina",
+          "edad": 24,
+          "repite": true
+        }
+      ],
+      "activo": true
+    }
+  ]
+}

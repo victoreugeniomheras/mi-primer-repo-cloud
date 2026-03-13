@@ -1,0 +1,70 @@
+a) Nombre del instituto.
+IES Ágora
+
+    /ies/nombre/text()
+
+
+b) Página web.
+http://www.iesagora.juntaextremadura.net
+
+    /ies/web/text()
+
+
+c) Nombre de los ciclos formativos
+Administración de Sistemas Informáticos en Red
+Desarrollo de Aplicaciones Multiplataforma
+Desarrollo de Aplicaciones Web
+Sistemas Microinformáticos y Redes
+
+    /ies/ciclos/ciclo/nombre/text()
+
+
+d) Siglas que identifican a los ciclos formativos
+id="ASIR"
+id="DAM"
+id="DAW"
+id="SMR"
+
+    //ciclo/@id
+
+
+e) Años en los que se publicaron los decretos de título de los ciclos
+formativos
+año="2009"
+año="2010"
+año="2010"
+año="2008"
+
+    //decretotitulo/@año
+
+
+f) Elemento <ciclo> del ciclo formativo de grado medio
+<ciclo id="SMR">
+<nombre>Sistemas Microinformáticos y Redes</nombre>
+<grado>Medio</grado>
+<decretotitulo año="2008"/>
+</ciclo>
+
+    //ciclo[grado="Medio"]
+
+
+g) Elemento <nombre> de los ciclos formativos de grado superior
+<nombre>Administración de Sistemas Informáticos en Red</nombre>
+<nombre>Desarrollo de Aplicaciones Multiplataforma</nombre>
+<nombre>Desarrollo de Aplicaciones Web</nombre>
+
+    //ciclo[grado="Superior"]/nombre
+
+
+h) Nombre de los ciclos formativos anteriores a 2010
+Administración de Sistemas Informáticos en Red
+Sistemas Microinformáticos y Redes
+
+    //ciclo[decretotitulo/@año < 2010]/nombre/text()
+
+i) Nombre de los ciclos formativos de 2008 ó 2010
+Desarrollo de Aplicaciones Multiplataforma
+Desarrollo de Aplicaciones Web
+Sistemas Microinformáticos y Redes
+
+    //ciclo[decretotitulo/@año=2008 or decretotitulo/@año=2010]/nombre/text()

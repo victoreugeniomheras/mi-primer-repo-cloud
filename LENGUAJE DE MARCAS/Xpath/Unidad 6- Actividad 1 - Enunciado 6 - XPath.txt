@@ -1,0 +1,24 @@
+1. Obtener el título del penúltimo libro registrado en la biblioteca
+
+    //libro[last()-1]/titulo/text()
+
+2. Obtener los nombres de los autores que tienen registrada una fecha
+de nacimiento pero cuyo año de publicación de su libro es distinto a
+1969
+
+    //libro[autor/@fechaNacimiento and fechaPublicacion/@año != '1969']/autor/text()
+
+3. Obtener el valor del atributo fechaNacimiento de aquellos autores
+que publicaron su obra específicamente en el año 1973
+
+//libro[fechaPublicacion/@año = '1973']/autor/@fechaNacimiento
+
+4. Obtener los títulos de los libros que se publicaron en el mismo año
+que el primer libro de la biblioteca
+
+//libro[fechaPublicacion/@año = /biblioteca/libro[1]/fechaPublicacion/@año]/titulo/text()
+
+5. Obtener los títulos de los libros publicados después de 1970 cuyo
+autor sea "Mario Vargas Llosa"
+
+//libro[fechaPublicacion/@año > 1970 and autor = 'Mario Vargas Llosa']/titulo/text()

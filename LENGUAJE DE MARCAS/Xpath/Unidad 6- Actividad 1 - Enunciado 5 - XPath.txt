@@ -1,0 +1,39 @@
+1. Obtener todos los títulos de los libros
+
+    //libro/titulo
+
+2. Obtener todos los libros de categoría "programacion"
+
+    //libro[@categoria="programacion"]
+
+3. Obtener los títulos de los libros publicados después de 2019
+
+    //libro[anio > 2019]/titulo
+
+4. Obtener el nombre de todos los usuarios estudiantes
+
+    //usuario[@tipo="estudiante"]/nombre
+
+5. Obtener los libros que cuestan más de 40€
+
+    //libro[precio > 40]
+
+6. Obtener los autores de nacionalidad española
+
+    //autor[@nacionalidad="España"]
+
+7. Obtener los libros prestados por el usuario "Juan Pérez"
+
+    //usuario[nombre="Juan Pérez"]/prestamos/prestamo/@libro
+
+8. Obtener el título del libro con id L003
+
+    //libro[@id="L003"]/titulo
+
+9. Obtener todos los usuarios que tienen más de un préstamo
+
+    //usuario[count(prestamos/prestamo) > 1]/nombre
+
+10. Obtener los títulos de los libros prestados
+
+    //libro[@id = //prestamo/@libro]/titulo

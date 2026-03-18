@@ -1,0 +1,86 @@
+a) Centro en el que se estudia la carrera cuyo id es c02
+    Facultad de Ciencias Sociales
+
+    //carrera[@id="c02"]/centro
+
+b) Nombre de las carreras que tengan subdirector
+    Dipl. Relaciones Laborales
+
+    //carrera[subdirector]/nombre
+
+c) Identificador de las carreras en las que hay algún alumno
+matriculado.
+    codigo="c01"
+    codigo="c02"
+    codigo="c02"
+
+    //carrera[alumnos/alumno]/@codigo
+
+d) Nombre de los alumnos con beca
+    Gestión de Bases de Datos
+    Lenguajes de Marcas y Sistemas de Gestión de la Información
+    Implantación de Aplicaciones Web
+
+    //alumno[beca]/nombre
+
+e) Grado de los ciclos con módulos de primer curso
+    Fernando
+
+    //alumno[curso="1"]/nombre
+
+f) Nombre de la asignatura de id a01 y titulación c01.
+    Ofimática
+
+    //asignatura[@id="a01" and @titulacion="c01"]/nombre
+
+g) Nombre de las asignaturas del primer trimestre.
+    Ofimática
+    Administración de Empresas
+
+    //asignatura[trimestre="1"]/nombre
+
+h) Nombre de las asignaturas que no tienen 4 créditos teóricos:
+    Ofimática
+    Ingeniería del Software
+
+    //asignatura[creditosTeoricos!=4]/nombre
+
+i) Nombre de los alumnos que están haciendo un proyecto.
+    Luisa
+
+    //alumno[proyecto]/nombre
+
+j) Código de las asignaturas que cursa el penúltimo alumno.
+    codigo="a02"
+    codigo="a01"
+
+    (//alumno)[last()-1]/asignaturas/asignatura/@codigo
+
+k) Primer apellido de los alumnos que estudian la asignatura de código a02
+    Pérez
+    Fernández
+
+    //alumno[asignaturas/asignatura/@codigo="a02"]/apellido1
+
+l) Nombre de la carrera que estudia Víctor Manuel.
+    I.T. Informática
+
+    //carrera[alumnos/alumno[nombre="Víctor Manuel"]]/nombre
+
+m) Nombre de las asignaturas que estudia Luisa
+    Ofimática
+    Ingeniería del Software
+
+    //alumno[nombre="Luisa"]/asignaturas/asignatura/nombre
+
+n) Primer apellido de los alumnos matriculados en Ingeniería del Software.
+    Pérez
+    Fernández
+
+    //alumno[asignaturas/asignatura/nombre="Ingeniería del Software"]/apellido1
+
+o) Nombre de las carreras en las que estudia algún hombre.
+    I.T. Informática
+    Dipl. Empresariales
+
+    //carrera[alumnos/alumno[sexo="Hombre"]]/nombre

@@ -1,0 +1,79 @@
+a) Seleccionar el nombre de todos los departamentos.
+
+    //departamento/@nombre
+
+b) Obtener el nombre de todos los empleados de la empresa.
+
+    //empleado/nombre/text()
+
+c) Seleccionar todos los puestos de trabajo disponibles.
+
+    //empleado/puesto/text()
+
+d) Seleccionar todos los títulos de los proyectos.
+
+    //proyecto/titulo/text()
+
+e) Seleccionar el nodo raíz completo (empresa).
+
+    /empresa
+
+f) Obtener todos los valores del atributo id de los departamentos.
+
+    //departamento/@id
+
+g) Seleccionar los empleados que tienen definida una categoría.
+
+    //empleado[@categoria]
+
+h) Seleccionar los proyectos que tienen el atributo estado.
+
+    //proyecto[@estado]
+
+i) Obtener el valor del atributo nombre de la etiqueta raíz empresa.
+
+    /empresa/@nombre
+
+j) Seleccionar todos los atributos de moneda de los presupuestos.
+
+    //presupuesto/@moneda
+
+k) Seleccionar los nombres de los empleados con un sueldo mayor a 3000.
+
+    //empleado[@sueldo > 3000]/nombre/text()
+
+l) Obtener el título del proyecto cuyo estado es "Activo".
+
+    //proyecto[@estado='Activo']/titulo/text()
+
+m) Seleccionar el primer empleado de la lista global de la empresa.
+
+    (//empleado)[1]
+
+n) Seleccionar el último departamento registrado en el sistema.
+
+    (//departamento)[last()]
+
+o) Seleccionar los empleados que son de categoría "Junior".
+
+    //empleado[@categoria='Junior']
+
+p) Seleccionar los títulos de proyectos que tengan un presupuesto entre 10000 y 20000 euros.
+
+    //proyecto[presupuesto >= 10000 and presupuesto <= 20000]/titulo/text()
+
+q) Obtener el nombre del departamento del penúltimo empleado (usando navegación ascendente /..).
+
+    (//empleado)[last()-1]/../@nombre
+
+r) Seleccionar los empleados que cobren más de 4000 o sean del departamento de Sistemas.
+
+    //empleado[@sueldo > 4000 or ../@nombre='Sistemas']
+
+s) Expresión anidada: Seleccionar el título del proyecto cuyo responsable es el empleado con ID "E03".
+
+    //proyecto[responsable/@ref='E03']/titulo/text()
+    
+t) Expresión anidada: Obtener el nombre de todos los empleados que trabajan en el mismo departamento que "Luis García"
+
+    //departamento[empleado/nombre='Luis García']/empleado/nombre/text()

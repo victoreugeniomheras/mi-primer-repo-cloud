@@ -1,0 +1,57 @@
+a) Obtener todos los títulos.
+
+/tienda/videojuego/titulo/text(file)
+
+b) Obtener todos los videojuegos.
+
+/tienda/videojuego/text(file)
+
+c) Obtener todos los precios.
+
+/tienda/videojuego/precio/text(file)
+
+d) Obtener todos los atributos id.
+
+/tienda/videojuego/@id
+
+e) Obtener todos los desarrolladores.
+
+/tienda/videojuego/desarrollador/text(file)
+
+f) Videojuegos con precio mayor de 50.
+
+/tienda/videojuego/[precio > 50]
+
+g) Títulos de videojuegos con stock mayor a 10.
+
+/tienda/videojuego[stock > 10]/titulo
+
+h) Videojuegos sin stock.
+
+/tienda/videojuego/[stock=0]
+
+i) Títulos de videojuegos de PlayStation 5.
+
+/tienda/videojuego[plataforma = "PlayStation 5"]/titulo
+
+j) Precio del videojuego con id="v3".
+
+/tienda/videojuego[@id="v3"]/precio
+
+k) Videojuegos cuyo precio es menor de 50 y con stock disponible.
+
+/tienda/videojuegos[precio<50 and stock > 0]
+
+l) Obtener el videojuego más caro.
+
+/tienda/videojuego[precio=max(/tienda/videojuego/precio)]
+
+m) Obtener el primer videojuego.
+
+/tienda/videojuego[1]
+
+n) Obtener el último videojuego.
+
+/tienda/videojuego[last()]
+
+o) Obtener títulos ordenados por precio (concepto teórico).

@@ -1,0 +1,61 @@
+{
+    "tienda": {
+        "videojuego": [
+        {
+            "id":"v1",
+            "titulo":"The Legend of Zelda",
+            "plataforma":"Nintendo Switch",
+            "precio": {
+            "valor": 59.99,
+            "moneda": "EUR"
+            },
+            "stock":15,
+            "desarrollador":"Nintendo"
+        },
+        {
+            "id":"v2",
+            "titulo":"God of War",
+            "plataforma":"PlayStation 5",
+            "precio": {
+            "valor": 59.99,
+            "moneda": "EUR"
+            },
+            "stock":8,
+            "desarrollador":"Sony"
+        },
+        {
+            "id":"v3",
+            "titulo":"Halo Infinite",
+            "plataforma":"Xbox Series X",
+            "precio": {
+            "valor": 59.99,
+            "moneda": "EUR"
+            },
+            "stock":20,
+            "desarollador":"Microsoft"
+        },
+        {
+            "id":"v4",
+            "titulo":"FIFA 24",
+            "plataforma":"Multiplataforma",
+            "precio": {
+            "valor": 59.99,
+            "moneda": "EUR"
+            },
+            "stock":0,
+            "desarollador":"EA Sport"
+        },
+        {
+            "id":"v5",
+            "titulo":"Cyberpunk",
+            "plataforma":"PC",
+            "precio": {
+            "valor": 59.99,
+            "moneda": "EUR"
+            },
+            "stock":5,
+            "desarollador":"CD Project"
+        }
+    ]
+    }
+}

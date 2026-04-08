@@ -1,0 +1,111 @@
+a) Solamente el Id de los diferentes ciclos .
+id="ASIR”
+id="DAM”
+id="DAW”
+id="SMR"
+
+SOLUCION:
+
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+return $ciclo/@id
+
+b) Solamente el nombre de los ciclos ordenados de manera
+ascendente.
+Administración de Sistemas Informáticos en Red
+Desarrollo de Aplicaciones Multiplataforma
+Desarrollo de Aplicaciones Web
+Sistemas Microinformáticos y Redes
+
+SOLUCION:
+
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+order by $ciclo/nombre ascending
+return data($ciclo/nombre)
+
+c) Solamente el nombre de los ciclos formativos de grado superior
+Administración de Sistemas Informáticos en Red
+Desarrollo de Aplicaciones Multiplataforma
+Desarrollo de Aplicaciones Web
+
+SOLUCION:
+
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/grado = "Superior"
+return data($ciclo/nombre)
+
+d) Estructura de los nombres de los ciclos formativos de grado
+medio
+<ciclo>
+<nombre>Sistemas Microinformáticos y Redes</nombre>
+</ciclo>
+
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/grado = "Medio"
+return 
+  <ciclo>
+    {$ciclo/nombre}
+  </ciclo>
+
+SOLUCION:
+
+e) Estructura de los nombres y año de los ciclos formativos cuyo
+año de decretotitulo sea posterior al 2009
+<ciclo>
+<nombre>Desarrollo de Aplicaciones
+Multiplataforma</nombre>
+<decreto anio="2010"/>
+</ciclo>
+<ciclo>
+<nombre>Desarrollo de Aplicaciones Web</nombre>
+<decreto anio="2010"/>
+</ciclo>
+
+SOLUCION:
+
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/decretotitulo/@año > 2009
+return 
+  <ciclo>
+    {$ciclo/nombre}
+    <decreto anio="{$ciclo/decretotitulo/@año}"/>
+  </ciclo>
+
+f) Número total de ciclos
+<totalCiclos>4</totalCiclos>
+
+SOLUCION:
+
+<totalCiclos>{count(doc("ies.xml")/ies/ciclos/ciclo)}</totalCiclos>
+
+g) Ciclos agrupados por grado
+<grados>
+<superior>
+<nombre>Administración de Sistemas Informáticos en
+Red</nombre>
+<nombre>Desarrollo de Aplicaciones
+Multiplataforma</nombre>
+<nombre>Desarrollo de Aplicaciones Web</nombre>
+</superior>
+<medio>
+<nombre>Sistemas Microinformáticos y Redes</nombre>
+</medio>
+</grados>
+
+SOLUCION:
+
+<grados>
+  <superior>
+    {
+      for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+      where $ciclo/grado = "Superior"
+      return $ciclo/nombre
+    }
+  </superior>
+  <medio>
+    {
+      for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+      where $ciclo/grado = "Medio"
+      return $ciclo/nombre
+    }
+  </medio>
+</grados>

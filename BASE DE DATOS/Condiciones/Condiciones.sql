@@ -52,3 +52,5 @@ MariaDB [academia_cursos]> show procedure status where Db='academia_cursos';
 | academia_cursos | duracioncursos | PROCEDURE | root@localhost | 2026-04-07 12:19:54 | 2026-04-07 12:19:54 | DEFINER       |         | utf8mb4              | utf8mb4_general_ci   | utf8mb4_spanish_ci |
 +-----------------+----------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
 1 row in set (0.027 sec)
+
+

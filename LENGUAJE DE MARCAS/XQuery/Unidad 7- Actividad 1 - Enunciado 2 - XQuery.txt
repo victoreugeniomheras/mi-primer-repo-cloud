@@ -1,0 +1,103 @@
+a) Nombre de los módulos que se imparten.
+Aplicaciones Web
+Gestión de Bases de Datos
+Lenguajes de Marcas y Sistemas de Gestión de la Información
+Implantación de Aplicaciones Web
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+return $ciclo/@id
+
+b) Nombre de los módulos del ciclo de ASIR ordenado de manera
+ascendente.
+Gestión de Bases de Datos
+Lenguajes de Marcas y Sistemas de Gestión de la Información
+Implantación de Aplicaciones Web
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+order by $ciclo/nombre ascending
+return data($ciclo/nombre)
+
+c) Nombre de los módulos de 2o curso ordenados de manera
+descendente
+Implantación de Aplicaciones Web
+Aplicaciones Web
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/grado = "Superior"
+return data($ciclo/nombre)
+
+d) Nombre de los módulos con menos de 5 horas semanales
+Aplicaciones Web
+Lenguajes de Marcas y Sistemas de Gestión de la Información
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/grado = "Medio"
+return 
+  <ciclo>
+    {$ciclo/nombre}
+  </ciclo>
+
+e) Identificador de los módulos de primer curso
+id="0372"
+id="0373"
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/decretotitulo/@año > 2009
+return 
+  <ciclo>
+    {$ciclo/nombre}
+    <decreto anio="{$ciclo/decretotitulo/@año}"/>
+  </ciclo>
+
+f) Nombre de los módulos que pertenecen a más de un ciclo e
+indicación de en cuantos módulos se imparte
+<modulo>
+<nombre>Lenguajes de Marcas y Sistemas de Gestión de la
+Información</nombre>
+<numCiclos>3</numCiclos>
+</modulo>
+
+SOLUCION:
+<totalCiclos>{count(doc("ies.xml")/ies/ciclos/ciclo)}</totalCiclos>
+
+g) Nombres de los módulos ordenados por sus horas semanales
+<modulo>
+<nombre>Gestión de Bases de Datos</nombre>
+<horas>5</horas>
+</modulo>
+<modulo>
+<nombre>Implantación de Aplicaciones Web</nombre>
+<horas>5</horas>
+</modulo>
+<modulo>
+<nombre>Aplicaciones Web</nombre>
+<horas>4</horas>
+</modulo>
+<modulo>
+<nombre>Lenguajes de Marcas y Sistemas de Gestión de la
+Información</nombre>
+<horas>4</horas>
+</modulo>
+
+SOLUCION:
+<grados>
+  <superior>
+    {
+      for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+      where $ciclo/grado = "Superior"
+      return $ciclo/nombre
+    }
+  </superior>
+  <medio>
+    {
+      for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+      where $ciclo/grado = "Medio"
+      return $ciclo/nombre
+    }
+  </medio>
+</grados>

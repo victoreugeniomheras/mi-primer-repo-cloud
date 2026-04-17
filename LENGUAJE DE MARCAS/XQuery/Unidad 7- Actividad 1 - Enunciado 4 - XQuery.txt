@@ -1,0 +1,97 @@
+a) Centro en el que se estudia la carrera cuyo id es c02
+Facultad de Ciencias Sociales
+
+SOLUCION:
+//carrera[@id='c02']/centro/text()
+
+b) Nombre de las carreras que tengan subdirector
+Dipl. Relaciones Laborales
+
+SOLUCION:
+//carrera[subdirector]/nombre/text()
+
+c) Identificador de las carreras en las que hay algún alumno
+matriculado.
+codigo="c01"
+codigo="c02"
+codigo="c02"
+
+SOLUCION:
+//alumno/estudios/carrera/@codigo
+
+d) Nombre de los alumnos con beca
+Fernando
+
+SOLUCION:
+//alumno[@beca='si']/nombre/text()
+
+e) Nombre de la asignatura de id a01 y titulación c01.
+Ofimática
+
+SOLUCION:
+//asignatura[@id='a01' and @titulacion='c01']/nombre/text()
+
+f) Nombre de las asignaturas del primer trimestre.
+Ofimática
+Administración de Empresas
+
+SOLUCION:
+//asignatura[trimestre='1']/nombre/text()
+
+g) Nombre de las asignaturas que no tienen 4 créditos teóricos:
+Ofimática
+Ingeniería del Software
+
+SOLUCION:
+//asignatura[creditos_teoricos != '4']/nombre/text()
+
+h) Nombre de los alumnos que están haciendo un proyecto.
+Luisa
+
+SOLUCION:
+//alumno[estudios/proyecto]/nombre/text()
+
+i) Código de las asignaturas que cursa el penúltimo alumno.
+codigo="a02"
+codigo="a01"
+
+SOLUCION:
+//alumno[last()-1]/estudios/asignaturas/asignatura/@codigo
+
+j) Primer apellido de los alumnos que estudian la asignatura de
+código a02
+Pérez
+Fernández
+
+SOLUCION:
+//alumno[estudios/asignaturas/asignatura/@codigo='a02']/apellido1/text()
+
+
+k) Nombre de la carrera que estudia Víctor Manuel.
+I.T. Informática
+
+SOLUCION:
+//carrera[@id = //alumno[nombre='Victor Manuel']/estudios/carrera/@codigo]/nombre/text()
+
+
+l) Nombre de las asignaturas que estudia Luisa
+Ofimática
+Ingeniería del Software
+
+SOLUCION:
+//asignatura[@id = //alumno[nombre='Luisa']/estudios/asignaturas/asignatura/@codigo]/nombre/text()
+
+m) Primer apellido de los alumnos matriculados en Ingeniería del
+Software.
+Pérez
+Fernández
+
+SOLUCION:
+//alumno[estudios/asignaturas/asignatura/@codigo = //asignatura[nombre='Ingeniería del Software']/@id]/apellido1/text()
+
+n) Nombre de las carreras en las que estudia algún hombre.
+I.T. Informática
+Dipl. Empresariales
+
+SOLUCION:
+//carrera[@id = //alumno[sexo='Hombre']/estudios/carrera/@codigo]/nombre/text()

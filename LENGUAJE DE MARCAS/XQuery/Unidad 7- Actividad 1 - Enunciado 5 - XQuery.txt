@@ -1,0 +1,75 @@
+1. Obtener el nombre de la biblioteca
+
+SOLUCION:
+data(doc("biblioteca.xml")/biblioteca/@nombre)
+
+2. Listar todos los títulos de libros
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libros/libro
+return data($libro/titulo)
+
+3. Obtener autores españoles
+
+SOLUCION:
+for $autor in doc("biblioteca.xml")/biblioteca/libros/libro/autor
+where $autor/@nacionalidad = "España"
+return data($autor)
+
+4. Obtener libros publicados después de 2020
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libros/libro
+where $libro/anio > 2020
+return data($libro/titulo)
+
+5. Obtener el título del libro con id L003
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libros/libro
+where $libro/@id = "L003"
+return data($libro/titulo)
+
+6. Obtener nombres de usuarios estudiantes
+
+SOLUCION:
+for $usuario in doc("biblioteca.xml")/biblioteca/usuarios/usuario
+where $usuario/@tipo = "estudiante"
+return data($usuario/nombre)
+
+7. Obtener libros prestados por U003
+
+SOLUCION:
+for $prestamo in doc("biblioteca.xml")/biblioteca/usuarios/usuario[@id='U003']/prestamos/prestamo
+return data($prestamo/@libro)
+
+8. Obtener usuarios que han tomado el libro L001
+
+SOLUCION:
+for $usuario in doc("biblioteca.xml")/biblioteca/usuarios/usuario
+where $usuario/prestamos/prestamo/@libro = "L001"
+return data($usuario/nombre)
+
+9. Fecha de los prestamos del estudiante “Pedro Ruiz”
+
+SOLUCION:
+for $usuario in doc("biblioteca.xml")/biblioteca/usuarios/usuario
+where $usuario/nombre = "Pedro Ruiz"
+return data($usuario/prestamos/prestamo/@fecha)
+
+10. Obtener el titulo y precio del libro más caro. Ayuda: función
+max().
+<info>
+<titulo>Python Avanzado</titulo>
+<precio moneda="EUR">50</precio>
+</info>
+
+SOLUCION:
+let $max_precio := max(doc("biblioteca.xml")/biblioteca/libros/libro/precio)
+for $libro in doc("biblioteca.xml")/biblioteca/libros/libro
+where $libro/precio = $max_precio
+return 
+  <info>
+    {$libro/titulo}
+    {$libro/precio}
+  </info>

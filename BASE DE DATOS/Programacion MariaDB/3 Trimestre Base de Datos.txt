@@ -1,0 +1,42 @@
+--3 Trimestre Base de Datos
+
+--(Coreccion Primer Ejercicio Procedimientos)
+
+--Entrada: codigo en el limite horas
+
+DELIMITER //
+(Procedimiento)
+Create Procedure monitorizaraula (
+    IN p_codigo_aula varchar(10),
+    IN p_limite_horas INT,
+    OUT p_mensaje_texto Varchar(100),
+    OUT p_nºhoras_totales INT
+    )
+
+--Salida: mensaje de texto nº de horas
+
+
+principal: BEGIN
+    DECLARE V_total_horas INT;
+        SELECT SUM(C.totales) INTO V_total_horas
+            IF V_total_horas IS NULL THEN
+            SET p_mensaje_texto = "Sin datos";
+            SET p_nºhoras_totales = 0
+            LEAVE principal;
+            ENDIF; -- Control de entrada
+            IF V_total_horas > p_limite_horas
+                SET p_mensaje_texto : "Sobrecargado";
+            ELSE
+                SET p_mensaje_texto : "Disponible";
+            END IF;
+            SET p_nºhoras_totales = V_total_horas - p_limite_horas;
+
+END principal//
+
+-- Llamar al procedimiento
+SET @mensaje = "  "
+SET @diferencia = 0;
+
+CALL monitorizaraula ("A1001",50, @mensaje, @diferencia)
+SELECT @mensaje,@diferencia
+as 'mensaje', 'diferencia' as 'diferencia';

@@ -1,0 +1,47 @@
+a) Nombre de los módulos del ciclo "SMR"
+Aplicaciones Web
+
+SOLUCION:
+for $modulo in doc("ies.xml")/ies/modulos/modulo
+where $modulo/ciclo = "SMR"
+return data($modulo/nombre)
+
+b) Nombre de los ciclos que incluyen el módulo "Lenguajes de
+Marcas y Sistemas de Gestión de la Información"
+Administración de Sistemas Informáticos en Red
+Desarrollo de Aplicaciones Multiplataforma
+Desarrollo de Aplicaciones Web
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/@id = doc("ies.xml")/ies/modulos/modulo[nombre="Lenguajes de Marcas y Sistemas de Gestión de la Información"]/ciclo
+return data($ciclo/nombre)
+
+c) Nombre de los módulos de los ciclos de grado superior.
+Gestión de Bases de Datos
+Lenguajes de Marcas y Sistemas de Gestión de la Información
+Implantación de Aplicaciones Web
+
+SOLUCION:
+for $modulo in doc("ies.xml")/ies/modulos/modulo
+where $modulo/ciclo = doc("ies.xml")/ies/ciclos/ciclo[grado="Superior"]/@id
+return data($modulo/nombre)
+
+d) Nombre de los módulos de los ciclos cuyo título se aprobó en
+2010
+Lenguajes de Marcas y Sistemas de Gestión de la Información
+
+SOLUCION:
+for $modulo in doc("ies.xml")/ies/modulos/modulo
+where $modulo/ciclo = doc("ies.xml")/ies/ciclos/ciclo[decretotitulo/@año="2010"]/@id
+return data($modulo/nombre)
+
+e) Grado de los ciclos con módulos de primer curso
+Superior
+Superior
+Superior
+
+SOLUCION:
+for $ciclo in doc("ies.xml")/ies/ciclos/ciclo
+where $ciclo/@id = doc("ies.xml")/ies/modulos/modulo[curso="1"]/ciclo
+return data($ciclo/grado)

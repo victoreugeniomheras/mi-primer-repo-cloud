@@ -1,0 +1,26 @@
+DELIMITER //
+
+CREATE PROCEDURE alerta_aula(
+    IN p_codigo_aula VARCHAR(10),
+    IN p_limite_horas INT,
+    OUT p_estado VARCHAR(20),
+    OUT p_diferencia INT
+)
+BEGIN
+    DECLARE v_total_horas INT DEFAULT 0;
+    SELECT IFNULL(SUM(c.horas),0)
+    INTO v_total_horas
+    FROM horarios h
+    JOIN cursos c ON h.id_curso = c.id_curso
+    JOIN aulas a ON h.id_aula = a.id_aula
+    WHERE a.codigo = p_codigo_aula;
+    IF v_total_horas > p_limite_horas THEN
+        SET p_estado = 'SOBRECARGA';
+        SET p_diferencia = v_total_horas - p_limite_horas;
+    ELSE
+        SET p_estado = 'DISPONIBLE';
+        SET p_diferencia = p_limite_horas - v_total_horas;
+    END IF;
+END //
+
+DELIMITER ;

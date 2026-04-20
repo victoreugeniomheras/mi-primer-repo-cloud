@@ -1,0 +1,32 @@
+1. Equipos exteriores
+2. Servirdor DNS 
+2. Routers
+3. OSPF 2 entre routers y equipos
+4. IP Estatica para todos los routers privados
+5. NAT router de borde
+
+
+- COMANDOS CISCO PARA DEFINIR UNA RUTA ESTATICA POR DEFECTO EN UN ROUTER:
+
+    Router&gt; enable
+    Router# configure terminal
+    Router(config)# ip route 0.0.0.0 0.0.0.0 nombre_y_numero_del_puerto_del_router_de_salida_hacia_Internet
+
+- COMANDOS CISCO PARA QUE UN ROUTER REALICE NAT SOBRECARGADA O PAT EN EL ROUTER DE BORDE:
+
+    Router&gt; enable
+    Router# configure terminal
+    Router (config)# access-list numero_de_lista permit IP_de_red_privada_que_quiere_salir_a_Internet Mascara_de_subred_invertida
+    Router(config)# ip nat inside source list numero_de_lista interface nombre_y_nº_del_puerto_del_router_de_la_parte_pública overload
+    Router(config)# interface nombre_y_numero_del_puerto_del_router_de_la_parte_pública
+    Router(config-if)# ip nat outside
+    Router(config-if)# interface nombre_y_numero_del_puerto_del_router_de_la_parte_privada
+    Router(config-if)# ip nat inside
+
+
+- OSPF 2:
+
+    Router&gt; enable
+    Router# configure terminal
+    Router (config)# route ospf 2
+    Router (config)# network 192.168.1.50 0.0.0.3 area 0

@@ -1,7 +1,7 @@
 1. Equipos exteriores
 2. Servirdor DNS 
 2. Routers
-3. OSPF 2 entre routers y equipos
+3. OSPF 2 entre routers y equipos (con los que se tocan)
 4. IP Estatica para todos los routers privados
 5. NAT router de borde
 
@@ -16,11 +16,12 @@
 
     Router&gt; enable
     Router# configure terminal
-    Router (config)# access-list numero_de_lista permit IP_de_red_privada_que_quiere_salir_a_Internet Mascara_de_subred_invertida
-    Router(config)# ip nat inside source list numero_de_lista interface nombre_y_nº_del_puerto_del_router_de_la_parte_pública overload
-    Router(config)# interface nombre_y_numero_del_puerto_del_router_de_la_parte_pública
+    Router (config)# access-list /numero_de_lista/ permit /IP_de_red_privada_que_quiere_salir_a_Internet/ /Mascara_de_subred_invertida/
+    Router(config)# ip nat inside source list /numero_de_lista/ interface /nombre_y_nº_del_puerto_del_router_de_la_parte_pública/ overload
+    Router(config)# interface /nombre_y_numero_del_puerto_del_router_de_la_parte_pública/
     Router(config-if)# ip nat outside
-    Router(config-if)# interface nombre_y_numero_del_puerto_del_router_de_la_parte_privada
+    Router(config-if)# exit
+    Router(config-if)# interface /nombre_y_numero_del_puerto_del_router_de_la_parte_privada/
     Router(config-if)# ip nat inside
 
 

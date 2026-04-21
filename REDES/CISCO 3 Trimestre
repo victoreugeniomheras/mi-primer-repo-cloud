@@ -24,6 +24,7 @@
     Router(config-if)# interface /nombre_y_numero_del_puerto_del_router_de_la_parte_privada/
     Router(config-if)# ip nat inside
 
+    (Con Numeros) - access-list 1 permit 10.8.150.0 0.0.0.255
 
 - OSPF 2:
 

@@ -31,3 +31,20 @@
     Router# configure terminal
     Router (config)# route ospf 2
     Router (config)# network 192.168.1.50 0.0.0.3 area 0
+
+    
+- COMANDOS PARA DEFINIR SUBINTERFACES EN UN ROUTER CISCO (VLAN)
+
+    enable
+    conf t
+
+    interface g0/0
+    no shutdown
+
+    interface g0/0.10
+    encapsulation dot1Q 10
+    ip address 192.168.150.1 255.255.255.192
+
+    interface g0/0.20
+    encapsulation dot1Q 20
+    ip address 192.168.150.65 255.255.255.192

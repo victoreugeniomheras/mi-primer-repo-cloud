@@ -1,0 +1,39 @@
+1. Obtener el título del penúltimo libro registrado en la biblioteca
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libro[last()-1]
+return data($libro/titulo)
+
+2. Obtener los nombres de los autores que tienen registrada una fecha
+de nacimiento pero cuyo año de publicación de su libro es distinto a
+1969
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libro
+where $libro/autor/@fechaNacimiento and $libro/fechaPublicacion/@año != "1969"
+return data($libro/autor)
+
+3. Obtener el valor del atributo fechaNacimiento de aquellos autores
+que publicaron su obra específicamente en el año 1973
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libro
+where $libro/fechaPublicacion/@año = "1973"
+return data($libro/autor/@fechaNacimiento)
+
+4. Obtener los títulos de los libros que se publicaron en el mismo año
+que el primer libro de la biblioteca
+
+SOLUCION:
+let $anio_primer_libro := doc("biblioteca.xml")/biblioteca/libro[1]/fechaPublicacion/@año
+for $libro in doc("biblioteca.xml")/biblioteca/libro
+where $libro/fechaPublicacion/@año = $anio_primer_libro
+return data($libro/titulo)
+
+5. Obtener los títulos de los libros publicados después de 1970 o cuyo
+autor sea "Mario Vargas Llosa"
+
+SOLUCION:
+for $libro in doc("biblioteca.xml")/biblioteca/libro
+where $libro/fechaPublicacion/@año > 1970 or $libro/autor = "Mario Vargas Llosa"
+return data($libro/titulo)

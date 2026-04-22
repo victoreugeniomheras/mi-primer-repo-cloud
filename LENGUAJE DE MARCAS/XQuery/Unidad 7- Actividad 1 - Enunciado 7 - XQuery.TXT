@@ -1,0 +1,129 @@
+1. Seleccionar el nombre de todos los departamentos.
+
+SOLUCION:
+for $dep in doc("empresa.xml")/empresa/departamento
+return data($dep/@nombre)
+
+2. Obtener el nombre de todos los empleados de la empresa.
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+return data($emp/nombre)
+
+3. Seleccionar todos los puestos de trabajo disponibles.
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+return data($emp/puesto)
+
+4. Seleccionar todos los títulos de los proyectos.
+
+SOLUCION:
+for $proy in doc("empresa.xml")//proyecto
+return data($proy/titulo)
+
+5. Seleccionar el nodo raíz completo (empresa).
+
+SOLUCION:
+doc("empresa.xml")/empresa
+
+6. Obtener todos los valores del atributo id de los departamentos.
+
+SOLUCION:
+for $dep in doc("empresa.xml")/empresa/departamento
+return data($dep/@id)
+
+7. Seleccionar los empleados que tienen definida una categoria.
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+where $emp/@categoria
+return $emp
+
+8. Seleccionar los proyectos que tienen el atributo estado.
+
+SOLUCION:
+for $proy in doc("empresa.xml")//proyecto
+where $proy/@estado
+return $proy
+
+9. Obtener el valor del atributo nombre de la etiqueta raíz empresa.
+
+SOLUCION:
+data(doc("empresa.xml")/empresa/@nombre)
+
+10. Seleccionar todos los atributos de moneda de los presupuestos.
+
+SOLUCION:
+for $presupuesto in doc("empresa.xml")//presupuesto
+return data($presupuesto/@moneda)
+
+11. Seleccionar los nombres de los empleados con un sueldo mayor a 3000.
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+where $emp/@sueldo > 3000
+return data($emp/nombre)
+
+12. Obtener el título del proyecto cuyo estado es "Activo".
+
+SOLUCION:
+for $proy in doc("empresa.xml")//proyecto
+where $proy/@estado = "Activo"
+return data($proy/titulo)
+
+13. Seleccionar el primer empleado de la lista global de la empresa.
+
+SOLUCION:
+(doc("empresa.xml")//empleado)[1]
+
+14. Seleccionar el último departamento registrado en el sistema.
+
+SOLUCION:
+(doc("empresa.xml")//departamento)[last()]
+
+15. Seleccionar los empleados que son de categoría "Junior".
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+where $emp/@categoria = "Junior"
+return $emp
+
+16. Seleccionar los títulos de proyectos que tengan un presupuesto entre
+10000 y 20000 euros.
+
+SOLUCION:
+for $proy in doc("empresa.xml")//proyecto
+where $proy/presupuesto >= 10000 and $proy/presupuesto <= 20000
+return data($proy/titulo)
+
+17. Obtener el nombre del departamento del penúltimo empleado (usando
+navegación ascendente /..).
+
+SOLUCION:
+let $penultimo := (doc("empresa.xml")//empleado)[last()-1]
+return data($penultimo/../@nombre)
+
+18. Seleccionar los empleados que cobren más de 4000 o sean del
+departamento de Sistemas.
+
+SOLUCION:
+for $emp in doc("empresa.xml")//empleado
+where $emp/@sueldo > 4000 or $emp/../@nombre = "Sistemas"
+return $emp
+
+19. Expresión anidada: Seleccionar el título del proyecto cuyo responsable
+es el empleado con ID "E03".
+
+SOLUCION:
+for $proy in doc("empresa.xml")//proyecto
+where $proy/responsable/@ref = doc("empresa.xml")//empleado[@id='E03']/@id
+return data($proy/titulo)
+
+20. Expresión anidada: Obtener el nombre de todos los empleados que
+trabajan en el mismo departamento que "Luis García".
+
+SOLUCION:
+for $dep in doc("empresa.xml")//departamento
+where $dep/empleado/nombre = "Luis García"
+return data($dep/empleado/nombre)

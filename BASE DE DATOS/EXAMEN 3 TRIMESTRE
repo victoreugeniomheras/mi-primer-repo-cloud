@@ -1,0 +1,1235 @@
+Insert update delete 1 punto
+automatizacion de tareas 1 punto
+
+preguntas tipo test de las dos u5 y u6
+
+Consultas sql dml.pdf ut4
+tema 9 consultas dentro de otras instrucciones tipo test
+
+INtroduccion sql dll ut3
+tema 4 actualizacion de tablas tipo test
+sintaxis insert, update y delete
+
+tema automatizaciones : manual funciones y procemineto
+
+
+
+Tema 4 ut3:
+
+        TEMA 4. ACTUALIZACION DE TABLAS
+
+        1 - Introducción
+        Como ya hemos explicado el lenguaje SQL incluye un conjunto de sentencias que permiten modificar,
+        borrar e insertar nuevas filas en una tabla. Este subconjunto de comandos del lenguaje SQL recibe la
+        denominación de Lenguaje de Manipulación de Datos (DML)
+        Las órdenes que no permiten actualizar los valores de las tablas son:
+         INSERT para la inserción de filas
+         UPDATE para la modificación de filas
+         DELETE para el borrado de filas.
+
+        2 - Inserción de nuevas filas en la base de datos
+        Para añadir nuevas filas a una tabla utilizaremos la sentencia INSERT.
+        2.1 – Formato de la inserción una fila
+        La sentencia para inserción de filas es INSERT cuyo formato típico es:
+
+        Notación: la lista de columnas en las que insertamos va es opcional, por lo que va entre
+        corchetes. Si no se especifica se esperan valores para todas las columnas.
+        Donde NombreTabla ............... es el nombre de la tabla en la que queremos insertar una fila.
+        NombreColumna......... incluye las columnas en las que queremos insertar.
+        Expresion..................... indica las expresiones cuyos valores resultado se insertarán,
+        existiendo una correspondencia con la lista de columnas anterior
+        Como se ve en el formato también se pueden insertar filas en una tabla sin especificar la lista de
+        columnas pero en este caso la lista de valores a insertar deberá coincidir en número y posición con las
+
+        Lenguaje SQL con MySQL
+
+        Página: 51
+        columnas de la tabla. El orden establecido para las columnas será el indicado al crear la tabla (el
+        mismo que aparece al hacer una descripción de la tabla DESC NombreTabla).
+
+        2.2 – Ejemplos de inserción de filas
+        Por ejemplo, para insertar una nueva fila en la tabla departamentos introduciremos la siguiente
+        instrucción:
+        mysql> INSERT INTO departamentos(dep_no, dnombre, localidad)
+        -> VALUES (50, 'MARKETING','BILBAO');
+        Query OK, 1 row affected (0.08 sec)
+        mysql> select * from departamentos;
+        +--------+---------------+-----------+
+        | DEP_NO | DNOMBRE | LOCALIDAD |
+        +--------+---------------+-----------+
+        | 10 | CONTABILIDAD | BARCELONA |
+        | 20 | INVESTIGACION | VALENCIA |
+        | 30 | VENTAS | MADRID |
+        | 40 | PRODUCCION | SEVILLA |
+        | 50 | MARKETING | BILBAO |
+        +--------+---------------+-----------+
+        5 rows in set (0.00 sec)
+        Este formato de inserción tiene, además, las siguientes características:
+         En la lista de columnas se pueden indicar todas o algunas de las columnas de la tabla.
+        En este último caso, aquellas columnas que no se incluyan en la lista quedarán sin ningún
+        valor en la fila insertada, es decir, se asumirá el valor NULL o el valor por defecto para las
+        columnas que no figuren en la lista. En aso de una columna definida como NOT NULL
+        tomará el valor 0 si es numérica o blancos sino.
+         Los valores incluidos en la lista de valores deberán corresponderse posicionalmente con las
+        columnas indicadas en la lista de columnas, de forma que el primer valor de la lista de
+        valores se incluirá en la columna indicada en primer lugar, el segundo en la segunda
+        columna, y así sucesivamente.
+         Se puede utilizar cualquier expresión para indicar un valor siempre que el resultado de la
+        expresión sea compatible con el tipo de dato de la columna correspondiente.
+        Algunos ejemplos de inserciones válidas son:
+        1- Inserción de un socio con socio_no=1000
+        mysql> INSERT INTO Socios
+        (socio_no,apellidos,telefono,fecha_alta,direccion,codigo_postal)
+        -> VALUES ( 1000,'LOPEZ SANTOS','916543267', '2005-01-08',
+        -> 'C. REAL 5',28400);
+        Query OK, 1 row affected (0.05 sec)
+        2 - Inserción de un socio con socio_no=1001
+        mysql> INSERT INTO Socios
+        (socio_no,apellidos,telefono,fecha_alta,direccion,codigo_postal)
+
+        Lenguaje SQL con MySQL
+
+        Página: 52
+        -> VALUES ( 1001,'PEREZ CERRO','918451256', '2005-01-12',
+        -> 'C. MAYOR 31',28400);
+        Query OK, 1 row affected (0.06 sec)
+        3 - Inserción de un socio con socio_no=1002
+        mysql> INSERT INTO Socios
+        (socio_no,apellidos,telefono,fecha_alta,direccion,codigo_postal)
+        -> VALUES ( 1002,'LOPEZ PEREZ','916543267', '2005-01-18',
+        -> 'C. REAL 5',28400);
+        Query OK, 1 row affected (0.06 sec)
+        4 - Inserción de un socio con socio_no=1003 sin valor en teléfono (como es un campo NOT NULL
+        en lugar de nulos pondrá blancos)
+        mysql> INSERT INTO socios
+        -> (socio_no,apellidos,fecha_alta,direccion,codigo_postal)
+        -> VALUES ( 1003,'ROMA LEIVA', '2005-01-21',
+        -> 'C. PANADEROS 9 ',28431);
+        Query OK, 1 row affected (0.06 sec)
+        5- Inserción de un préstamo para el socio con socio_no=1000
+        mysql> INSERT INTO prestamos
+        -> (num_prestamo, socio_no)
+        -> VALUES ( 1,1000);
+        Query OK, 1 row affected (0.05 sec)
+        6 - Inserción de un préstamo para el socio con socio_no=1002
+        mysql> INSERT INTO prestamos
+        -> (num_prestamo, socio_no)
+        -> VALUES ( 2,1002);
+        Query OK, 1 row affected (0.07 sec)
+        7 - Inserción de un socio con socio_no=1004, con una instrucción INSERT sin lista de columnas:
+        mysql> INSERT INTO socios
+        -> VALUES ( 1004,'GOMEZ DURUELO','918654329', '2005-01-31',
+        -> 'C. REAL 15',28400);
+        Query OK, 1 row affected (0.43 sec)
+        8 - Inserción de un socio con socio_no=1005, con una instrucción INSERT sin valor en el campo
+        fecha que tiene un valor por defecto (pondrá ese valor 2000-01-01)
+        mysql> INSERT INTO socios
+        -> (socio_no,apellidos,telefono,direccion,codigo_postal)
+        -> VALUES ( 1005,'PEÑA MAYOR','918515256','C. LARGA 31',
+        -> 28431);
+        Query OK, 1 row affected (0.07 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 53
+        9 - Inserción de un socio con socio_no=1004, con una instrucción INSERT sin lista de columnas:
+        mysql> INSERT INTO prestamos
+        -> VALUES ( 4,1004);
+        Query OK, 1 row affected (0.40 sec)
+        Algunos intentos de inserciones erróneas:
+        1 – Inserción en la tabla socios en la que falta un valor para la columna dirección:
+        mysql> INSERT INTO Socios
+        -> (socio_no,apellidos,telefono,fecha_alta,direccion)
+        -> VALUES ( 1005,'LOPEZ SANTOS','916543267', '2005-01-08',
+        -> 'C. REAL 5',28400);
+        ERROR 1136(21S01):Column count doesn't match value count at row 1
+        2 – Inserción en la tabla socios de una columna con clave primaria duplicada:
+        mysql> INSERT INTO Socios
+        (socio_no,apellidos,telefono,fecha_alta,direccion,codigo_postal)
+        -> VALUES ( 1000,'LOPEZ SANTOS','916543267', '2005-01-08',
+        -> 'C. REAL 5',28400);
+        ERROR 1062 (23000): Duplicate entry '1000' for key 1
+        3 - Inserción en la tabla socios de una fila con valores duplicados en la columna apellidos:
+        mysql> INSERT INTO Socios
+        (socio_no,apellidos,telefono,fecha_alta,direccion,codigo_postal)
+        -> VALUES ( 1009,'LOPEZ SANTOS','916543267', '2005-01-18',
+        -> 'C. REAL 5',28400);
+        ERROR 1062 (23000): Duplicate entry 'LOPEZ SANTOS' for key 2
+        4 - Inserción de una fila en la tabla prestamos con un valor en la columna socios_no que no
+        existe en la tabla socios
+        mysql> INSERT INTO prestamos
+        -> (num_prestamo, socio_no)
+        -> VALUES ( 3,1009);
+        ERROR 1216 (23000): Cannot add or update a child row: a foreign key
+        constraint fails
+        Comprobación de los valores insertados:
+        mysql> SELECT *
+        -> FROM socios;
+        + + + + + + +
+        | socio_no | apellidos | telefono | fecha_alta | direccion | codigo_postal |
+        + + + + + + +
+        | 1000 | LOPEZ SANTOS | 916543267 | 2005-01-08 | C. REAL 5 | 28400 |
+        | 1001 | PEREZ CERRO | 918451256 | 2005-01-12 | C. MAYOR 31 | 28400 |
+        | 1002 | LOPEZ PEREZ | 916543267 | 2005-01-18 | C. REAL 5 | 28400 |
+        | 1003 | ROMA LEIVA | | 2005-01-21 | C. PANADEROS 9 | 28431 |
+        | 1004 | GOMEZ DURUELO | 918654329 | 2005-01-31 | C. REAL 15 | 28400 |
+        | 1005 | PEÑA MAYOR | 918515256 | 2000-01-01 | C. LARGA 31 | 28431 |
+        + + + + + + +
+
+        Lenguaje SQL con MySQL
+
+        Página: 54
+
+        6 rows in set (0.00 sec)
+        SELECT *
+        FROM prestamos;
+        mysql> SELECT *
+        -> FROM prestamos;
+        +--------------+----------+
+        | num_prestamo | socio_no |
+        +--------------+----------+
+        | 1 | 1000 |
+        | 2 | 1002 |
+        | 4 | 1004 |
+        +--------------+----------+
+        3 rows in set (0.00 sec)
+        Ejemplo de inserción con un campo autonumérico, de paso creamos una tabla con una columna
+        autonumérica.
+        mysql> CREATE TABLE inventario
+        -> (num INT(2) AUTO_INCREMENT PRIMARY KEY,
+        -> descripcion VARCHAR(15));
+        Query OK, 0 rows affected (0.49 sec)
+        1 – Inserción sin enumerar la columna autonumérica
+        mysql> INSERT INTO inventario (descripcion)
+        -> VALUES ('ARMARIO BLANCO');
+        Query OK, 1 row affected (0.42 sec)
+        mysql> INSERT INTO inventario (descripcion)
+        -> VALUES ('MESA MADERA');
+        Query OK, 1 row affected (0.05 sec)
+        2 – Inserción de toda la fila ( en este caso debe ponerse NULL en la columna correspondiente)
+        mysql> INSERT INTO inventario
+        -> VALUES (NULL,'ORDENADOR');
+        Query OK, 1 row affected (0.07 sec)
+        mysql> INSERT INTO inventario
+        -> VALUES (NULL,'SILLA GIRATORIA');
+        Query OK, 1 row affected (0.06 sec)
+
+        Comprobación de los valores insertados:
+        mysql> SELECT *
+        -> FROM inventario;
+        +-----+-----------------+
+        | num | descripcion |
+
+        Lenguaje SQL con MySQL
+
+        Página: 55
+
+        +-----+-----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA |
+        +-----+-----------------+
+        4 rows in set (0.00 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 56
+
+        3 - Modificación de filas.
+        En ocasiones necesitaremos modificar alguno de los datos de las filas existentes de una tabla. Por
+        ejemplo, cambiar el salario o el departamento de uno o varios empleados, etcétera. En estos casos
+        utilizaremos la sentencia UPDATE.
+        3.1 – Formato de la modificación de filas
+        La sentencia de modificación de filas es UPDATE cuyo formato genérico es el siguiente:
+
+        Notación: puede actualizarse una o varias columnas, por lo que la segunda actualización va
+        entre corchetes La cláusula WHERE aparece entre corchetes porque es opcional. En el caso
+        de que no se utilice, la actualización afectará a toda la tabla.
+        Donde NombreTabla............indica la tabla destino donde se encuentran las filas que queremos
+
+        borrar.
+
+        NombreColumna... ....... indica el nombre de la columna cuyo valor queremos modificar
+        Expresión.................. es una expresión cuyo valor resultado será el nuevo valor de la
+
+        columna
+
+        Condición... .................. es la condición que deben cumplir las filas para que les afecte la
+
+        modificación.
+
+        Recordamos que una expresión es un conjunto de datos, constantes y variables, operadores y
+        funciones. Y una condición es una expresión cuyo resultado es verdadero/falso/nulo
+        Para aquellas filas en las que al evaluar la condición el resultado es verdadero se modificará el
+        valor de la columna poniendo como nuevo valor el resultado de evaluar la expresión.
+        Si se quiere modificar más de una columna de la misma tabla se indicarán separadas por comas.
+
+        3.2 – Ejemplos de modificación de filas
+        Partimos de la tabla socios
+        mysql> SELECT * FROM socios;
+        + + + + + + +
+        | socio_no | apellidos | telefono | fecha_alta | direccion | codigo_postal |
+        + + + + + + +
+        | 1000 | LOPEZ SANTOS | 916543267 | 2005-01-08 | C. REAL 5 | 28400 |
+        | 1001 | PEREZ CERRO | 918451256 | 2005-01-12 | C. MAYOR 31 | 28400 |
+        | 1002 | LOPEZ PEREZ | 916543267 | 2005-01-18 | C. REAL 5 | 28400 |
+        | 1003 | ROMA LEIVA | | 2005-01-21 | C. PANADEROS 9 | 28431 |
+        | 1004 | GOMEZ DURUELO | 918654329 | 2005-01-31 | C. REAL 15 | 28400 |
+        | 1005 | PEÑA MAYOR | 918515256 | 2000-01-01 | C. LARGA 31 | 28431 |
+        + + + + + + +
+        6 rows in set (0.01 sec)
+        1 - Supongamos que se desea cambiar la dirección del socio de número 1000 y la nueva dirección es :
+        UPDATE NombreTabla
+        SET NombreColumna=Expresion [,NombreColumna=Expresion. ]
+
+        Lenguaje SQL con MySQL
+
+        Página: 57
+
+        'C.CUESTA 2'.
+        mysql> UPDATE socios
+        -> SET direccion = 'C.CUESTA 2'
+        -> WHERE socio_no = 1000;
+        Query OK, 1 row affected (0.08 sec)
+        Rows matched: 1 Changed: 1 Warnings: 0
+        2 - Supongamos que se desea cambiar el teléfono del socio de número 1000 y el nuevo teléfono es
+        918455431
+        mysql> UPDATE socios
+        -> SET telefono = '918455431'
+        -> WHERE socio_no = 1000;
+        Query OK, 1 row affected (0.06 sec)
+        Rows matched: 1 Changed: 1 Warnings: 0
+        También podíamos haber modificado las dos columnas con una sola sentencia:
+        mysql> UPDATE socios
+        -> SET telefono = '918455431',direccion='C.CUESTA 2'
+        -> WHERE socio_no = 1000;
+        Query OK, 0 rows affected (0.08 sec)
+        Rows matched: 1 Changed: 1 Warnings: 0
+        Las actualizaciones anteriores afectan a una única fila pero podemos escribir comandos de
+        actualización que afecten a varias filas:
+        mysql> UPDATE socios
+        -> SET codigo_postal = 28401
+        -> WHERE codigo_postal = 28400;
+        Query OK, 4 rows affected (0.07 sec)
+        Rows matched: 4 Changed: 4 Warnings: 0
+        Si no se incluye la cláusula WHERE la actualización afectará a todas las filas. El siguiente ejemplo
+        modifica la fecha de alta de todos los empleados al valor 1 de enero de 2005.
+        mysql> UPDATE socios
+        -> SET fecha_alta = '2005-01-01';
+        Query OK, 6 rows affected (0.06 sec)
+        Rows matched: 6 Changed: 6 Warnings: 0
+        Podemos comprobar las modificaciones:
+        mysql> SELECT *
+        -> FROM socios;
+        + + + + + + +
+        | socio_no | apellidos | telefono | fecha_alta | direccion | codigo_postal |
+        + + + + + + +
+        | 1000 | LOPEZ SANTOS | 918455431 | 2005-01-01 | C.CUESTA 2 | 28401 |
+        | 1001 | PEREZ CERRO | 918451256 | 2005-01-01 | C. MAYOR 31 | 28401 |
+        | 1002 | LOPEZ PEREZ | 916543267 | 2005-01-01 | C. REAL 5 | 28401 |
+        | 1003 | ROMA LEIVA | | 2005-01-01 | C. PANADEROS 9 | 28431 |
+        | 1004 | GOMEZ DURUELO | 918654329 | 2005-01-01 | C. REAL 15 | 28401 |
+        | 1005 | PEÑA MAYOR | 918515256 | 2005-01-01 | C. LARGA 31 | 28431 |
+        + + + + + + +
+        6 rows in set (0.00 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 58
+
+        4 - Eliminación de filas.
+        La sentencia DELETE es la que nos permite eliminar una o más filas de una tabla.
+
+        4.1 – Formato de la eliminación de filas
+        Para eliminar o suprimir filas de una tabla utilizaremos la sentencia DELETE. Su formato genérico es el
+        siguiente:
+
+        Notación: la cláusula WHERE es opcional por eso aparece entre corchetes. Si no se
+        especifica se borraran todas las filas de la tabla
+
+        donde NombreTabla............. indica la tabla destino donde se encuentran las filas que
+
+        queremos borrar
+
+        Condición ................... es la condición que deben cumplir las filas a borrar
+        4.2 – Ejemplos de la eliminación de filas
+        A continuación se muestran algunos ejemplos de instrucciones DELETE
+        mysql> DELETE
+        -> FROM socios
+        -> WHERE socio_no = 1001;
+        Query OK, 1 row affected (0.08 sec)
+        Hay que tener cuidado con las claves ajenas. Como prestamos tiene una clave ajena que
+        referencia a socios si pretendemos borrar un socio que tiene préstamos nos encontraremos con
+        un error.
+        mysql> DELETE
+        -> FROM socios
+        -> WHERE socio_no = 1002;
+        ERROR 1217 (23000): Cannot delete or update a parent row: a
+        foreign key constraint fails
+        Podemos comprobar las modificaciones:
+        mysql> SELECT *
+        -> FROM socios;
+        + + + + + + +
+        | socio_no | apellidos | telefono | fecha_alta | direccion | codigo_postal |
+        + + + + + + +
+        | 1000 | LOPEZ SANTOS | 918455431 | 2005-01-01 | C.CUESTA 2 | 28401 |
+
+        DELETE FROM NombreTabla
+        [WHERE Condicion];
+
+        Lenguaje SQL con MySQL
+
+        Página: 59
+        | 1002 | LOPEZ PEREZ | 916543267 | 2005-01-01 | C. REAL 5 | 28401 |
+        | 1003 | ROMA LEIVA | | 2005-01-01 | C. PANADEROS 9 | 28431 |
+        | 1004 | GOMEZ DURUELO | 918654329 | 2005-01-01 | C. REAL 15 | 28401 |
+        | 1005 | PEÑA MAYOR | 918515256 | 2005-01-01 | C. LARGA 31 | 28431 |
+        + + + + + + +
+        6 rows in set (0.00 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 60
+
+        5 - Restricciones de integridad y actualizaciones.
+        Como ya hemos vistos los gestores de bases de datos relacionales permiten especificar ciertas
+        condiciones que deban cumplir los datos contenidos en las tablas, como por ejemplo:
+         Restricción de clave primaria (PRIMARY KEY) : columnas que identifican cada fila
+         Restricción de clave ajena (FOREIGN KEY): columnas que hacen referencia a otras de la
+        misma o de otras tablas
+         Restricción de comprobación de valores (CHECK): conjunto de valores que puede o debe
+        tomar una columna.
+         Restricción de no nulo (NOT NULL): columnas que tienen que tener necesariamente un valor
+        no nulo.
+         Restricción de unicidad (UNIQUE): columnas que no pueden tener valores duplicados.
+
+        5.1 - Control de las restricciones de integridad referencial
+        Estas restricciones dan lugar a que no podamos hacer cualquier modificación en los datos de las tablas.
+        No nos estará permitido hacer inserciones ni modificaciones con valores no permitidos en las columnas
+        ni borrar filas a las que referencien otras filas de la misma o de otra tabla
+        En nuestras tablas de ejemplo están definidas las siguientes restricciones:
+        a) Claves primarias (PRIMARY KEY). Sirven para referirse a una fila de manera inequívoca. No se
+        permiten valores repetidos.
+        TABLA DEPARTAMENTOS: PRIMARY KEY (DEP_NO)
+        TABLA EMPLEADOS: PRIMARY KEY (EMP_NO)
+        TABLA CLIENTES: PRIMARY KEY(CLIENTE_NO)
+        TABLA PRODUCTOS: PRIMARY KEY (PRODUCTO_NO)
+        TABLA PEDIDOS: PRIMARY KEY (PEDIDO_NO)
+        Como ya hemos visto no podemos hacer inserciones con valores repetidos de las claves primarias.
+        b) Claves ajenas (FOREIGN KEY): Se utilizan para hacer referencia a columnas de otras tablas.
+        Cualquier valor que se inserte en esas columnas tendrá su equivalente en la tabla referida.
+        Opcionalmente se pueden indicar las acciones a realizar en caso de borrado o cambio de las
+        columnas a las que hace referencia .
+        TABLA EMPLEADOS: FOREIGN KEY (DEP_NO)
+
+        REFERENCES DEPARTAMENTOS(DEP NO)
+
+        TABLA CLIENTES: FOREIGN KEY (VENDEDOR_NO)
+
+        REFERENCES EMPLEADOS(EMP_NO)
+
+        TABLA PEDIDOS: FOREIGN KEY (PRODUCTO_NO)
+
+        REFERENCES PRODUCTOS(PRODUCTO NO)
+
+        TABLA PEDIDOS: FOREIGN KEY (CLIENTE_NO)
+
+        REFERENCES CLIENTES(CLIENTE NO)
+
+        Las claves ajenas sirven para relacionar dos tablas entre sí y limitan los valores que puede tomar
+        esa columna a los valores existentes en ese momento en la columna a la que referencian, pudiendo
+        tomar valores existentes en esa columna o nulos.
+
+        Lenguaje SQL con MySQL
+
+        Página: 61
+         Esto nos limita los valores de las claves ajenas no podrán tomar valores que no
+        existan en las columnas referenciadas
+         Los valores de las claves primarias no podrán actualizarse si existen filas que los
+        referencian.
+        Lo vemos con un ejemplo:
+        La tabla EMPLEADOS tiene una clave ajena DEP_NO que referencia la clave primaria DEP_NO
+        de la tabla DEPARTAMENTOS.
+        Si existe un departamento con dep_no = 20 y existen filas de empleados con este valor de
+        dep_no
+        1. No podremos borrar ni modificar el valor de dep_no = 20 de la tabla DEPARTAMENTOS
+        2. No podremos modificar el valor del campo dep_no de la tabla EMPLEADOS a un valor
+        que no exista en la tala DEPARTAMENTOS.
+        Estas condiciones se determinaron al diseñar la base de datos y se especificaron e implementaron
+        mediante el lenguaje de definición de datos (DDL). Por lo tanto, todos los comandos de manipulación de
+        datos deberán respetar estas restricciones de integridad ya que en caso contrario el comando fallaráy el
+        sistema devolverá un error.
+
+        5.2 - Ejemplos de borrados y modificaciones en cascada
+        Vamos a ver con un ejemplo como funciona el borrado en cascada.
+        Creamos las tablas departamentos2 y empleados2 con una clave ajena con borrado en cascada
+        e insertamos los valores desde las tablas departamentos y empleados
+        mysql> CREATE TABLE departamentos2
+        -> (dep_no INT(4),
+        -> dnombre VARCHAR(14),
+        -> localidad VARCHAR(10),
+        -> CONSTRAINT PK2_DEP PRIMARY KEY (DEP_NO)
+        -> );
+        Query OK, 0 rows affected (0.09 sec)
+        mysql> INSERT INTO departamentos2
+        -> SELECT dep_no, dnombre, localidad
+        -> FROM departamentos;
+        Query OK, 4 rows affected (0.03 sec)
+        Records: 4 Duplicates: 0 Warnings: 0
+        mysql> CREATE TABLE empleados2
+        -> (emp_no INT(4),
+        -> apellido VARCHAR(8),
+        -> oficio VARCHAR(15),
+        -> director INT(4),
+        -> fecha_alta DATE,
+        -> dep_no INT (2),
+        -> CONSTRAINT PK_EMPLEADOS_EMP_NO2 PRIMARY KEY (emp_no),
+        -> CONSTRAINT FK_EMP_DEP_NO2 FOREIGN KEY (dep_no)
+        -> REFERENCES departamentos2(dep_no) ON DELETE CASCADE
+        -> );
+        Query OK, 0 rows affected (0.06 sec)
+        mysql> INSERT INTO empleados2
+
+        Lenguaje SQL con MySQL
+
+        Página: 62
+
+        -> SELECT emp_no, apellido, oficio, director,
+        -> fecha_alta, dep_no
+        -> FROM empleados;
+        Query OK, 9 rows affected (0.03 sec)
+        Records: 9 Duplicates: 0 Warnings: 0
+        mysql> SELECT * FROM departamentos2;
+        +--------+---------------+-----------+
+        | dep_no | dnombre | localidad |
+        +--------+---------------+-----------+
+        | 10 | CONTABILIDAD | BARCELONA |
+        | 20 | INVESTIGACION | VALENCIA |
+        | 30 | VENTAS | MADRID |
+        | 40 | PRODUCCION | SEVILLA |
+        +--------+---------------+-----------+
+        4 rows in set (0.00 sec)
+        SELECT * FROM empleados2;
+        mysql> SELECT * FROM empleados2;
+        + + + + + +--------+
+        | emp_no | apellido | oficio | director | fecha_alta | dep_no |
+        + + + + + +--------+
+        | 7499 | ALONSO | VENDEDOR | 7698 | 1981-02-23 | 30 |
+        | 7521 | LOPEZ | EMPLEADO | 7782 | 1981-05-08 | 10 |
+        | 7654 | MARTIN | VENDEDOR | 7698 | 1981-09-28 | 30 |
+        | 7698 | GARRIDO | DIRECTOR | 7839 | 1981-05-01 | 30 |
+        | 7782 | MARTINEZ | DIRECTOR | 7839 | 1981-06-09 | 10 |
+        | 7839 | REY | PRESIDENTE | NULL | 1981-11-17 | 10 |
+        | 7844 | CALVO | VENDEDOR | 7698 | 1981-09-08 | 30 |
+        | 7876 | GIL | ANALISTA | 7782 | 1982-05-06 | 20 |
+        | 7900 | JIMENEZ | EMPLEADO | 7782 | 1983-03-24 | 20 |
+        + + + + + +--------+
+        9 rows in set (0.00 sec)
+        Ahora vamos a borrar una fila en la tabla departamentos. Si no existiese borrado en cascada, debido
+        a la integridad referencial, no podríamos borrar ningún departamento que tuviese empleados. De
+        esta forma al borrar un departamento se borrarán todos los empleados de ese departamento.
+        mysql> DELETE FROM departamentos2
+        -> WHERE dep_no=10;
+        Query OK, 1 row affected (0.05 sec)
+        SELECT * FROM departamentos2;
+        mysql> SELECT * FROM departamentos2;
+        +--------+---------------+-----------+
+        | dep_no | dnombre | localidad |
+        +--------+---------------+-----------+
+        | 20 | INVESTIGACION | VALENCIA |
+        | 30 | VENTAS | MADRID |
+        | 40 | PRODUCCION | SEVILLA |
+        +--------+---------------+-----------+
+        3 rows in set (0.00 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 63
+
+        SELECT * FROM empleados2;
+        mysql> SELECT * FROM empleados2;
+        +--------+----------+----------+----------+------------+--------+
+        | emp_no | apellido | oficio | director | fecha_alta | dep_no |
+        +--------+----------+----------+----------+------------+--------+
+        | 7499 | ALONSO | VENDEDOR | 7698 | 1981-02-23 | 30 |
+        | 7654 | MARTIN | VENDEDOR | 7698 | 1981-09-28 | 30 |
+        | 7698 | GARRIDO | DIRECTOR | 7839 | 1981-05-01 | 30 |
+        | 7844 | CALVO | VENDEDOR | 7698 | 1981-09-08 | 30 |
+        | 7876 | GIL | ANALISTA | 7782 | 1982-05-06 | 20 |
+        | 7900 | JIMENEZ | EMPLEADO | 7782 | 1983-03-24 | 20 |
+        +--------+----------+----------+----------+------------+--------+
+        6 rows in set (0.00 sec)
+
+        Lenguaje SQL con MySQL
+
+        Página: 64
+        6 - Control de transacciones: COMMIT y ROLLBACK.
+        Los gestores de bases de datos disponen de dos comandos que permiten confirmar o deshacer los
+        cambios realizados en la base de datos:
+         COMMIT: confirma los cambios realizados haciéndolos permanentes .
+         ROLLBACK: deshace los cambios realizados.
+        Cuando hacemos modificaciones en las tablas estas no se hacen efectivas (llevan a disco) hasta que
+        no ejecutamos la sentencia COMMIT. Cuando ejecutamos comandos DDL (definición de datos) se
+        ejecuta un COMMIT automático, o cuando cerramos la sesión.
+        El comando ROLLBACK no permite deshacer estos cambios sin que lleguen a validarse. Cuando
+        ejecutamos este comando se deshacen todos los cambios hasta el último COMMIT ejecutado.
+        Hay dos formas de trabajar con AUTO_COMMIT activado (validación automática de los cambios) o
+        desactivado. Si está activado se hace COMMIT automáticamente cada sentencia y no es posible
+        hacer ROLLBACK. Si no lo está, tenemos la posibilidad de hacer ROLLBACK después de las
+        sentencias DML (INSERT, UPDATE, DELETE) dejando sin validar los cambios. Es útil para hacer
+        pruebas.
+        Existe una variable, AUTO_COMMIT, que indica la forma de trabajo y tiene el valor 1 si está en modo
+        AUTO_COMMIT y 0 si no lo está. Por defecto el MySQL está en modo AUTO_COMMIT. Su valor se
+        puede cambia con la sentencia:
+        mysql> SET AUTOCOMMIT = 0;
+        Query OK, 0 rows affected (0.41 sec)
+        Vamos a verlo con un ejemplo:
+        mysql> SELECT *
+        -> FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        +-----+----------------+
+        4 rows in set (0.00 sec)
+        mysql> SET AUTOCOMMIT = 0;
+        Query OK, 0 rows affected (0.41 sec)
+        mysql> SELECT * FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        +-----+----------------+
+
+        Lenguaje SQL con MySQL
+
+        Página: 65
+
+        4 rows in set (0.00 sec)
+        mysql> INSERT INTO inventario
+        -> VALUES (NULL,'IMPRESORA');
+        Query OK, 1 row affected (0.00 sec)
+        mysql> SELECT * FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        | 5 | IMPRSORA |
+        +-----+----------------+
+        4 rows in set (0.00 sec)
+        mysql> ROLLBACK;
+        Query OK, 0 rows affected (0.09 sec)
+        mysql> SELECT * FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        +-----+----------------+
+        4 rows in set (0.00 sec)
+        Para hacer los ejercicios y los ejemplos puede ser interesante modificar esta variable y así disponer
+        de la posibilidad de hacer ROLLBACK. Cada vez que se inicie una sesión estará en modo
+        AUTO_COMMIT que es el valor por defecto y el ROLLBACk no será aplicable.
+        mysql> SET AUTOCOMMIT = 1;
+        Query OK, 0 rows affected (0.41 sec)
+        mysql> INSERT INTO inventario
+        -> VALUES (NULL,'ARCHIVADOR');
+        Query OK, 1 row affected (0.06 sec)
+        mysql> SELECT * FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        | 6 | ARCHIVADOR |
+        +-----+----------------+
+
+        Lenguaje SQL con MySQL
+
+        Página: 66
+
+        5 rows in set (0.00 sec)
+        mysql> ROLLBACK;
+        Query OK, 0 rows affected (0.00 sec)
+        mysql> SELECT * FROM inventario;
+        +-----+----------------+
+        | num | descripcion |
+        +-----+----------------+
+        | 1 | ARMARIO BLANCO |
+        | 2 | MESA MADERA |
+        | 3 | ORDENADOR |
+        | 4 | SILLA GIRATORIA|
+        | 6 | ARCHIVADOR |
+        +-----+----------------+
+        5 rows in set (0.00 sec)
+
+
+Tema 9:
+
+        TEMA 9. CONSULTAS DENTRO DE OTRAS
+
+INSTRUCCIONES
+
+1 - Creación de una tabla a partir de una selección de otra
+tabla.
+En el momento de crear una tabla podemos utilizar la definición de otra ya creada, utilizando toda la
+definición o aquella parte que no interese.
+1.1 – Formato para la creación de una tabla a partir de una selección
+de otra tabla.
+
+Notación: las definiciones de las columnas son opcionales, por lo que están entre corchetes.
+donde NombreTabla ..................... es el identificador de la nueva tabla que se crea
+SentenciaSelect ....................... es cualquier sentencia select
+IGNORE|REPLACE .................. opciones de duplicados en campos únicos
+Los nombres de las columnas de la nueva tabla son opcionales. En caso de que no se especifique
+tomarán los valores de la otra tabla o de los alias correspondientes. Pero debe tenerse cuidado con
+ello pues si hay expresiones o funciones en la lista del select y no tienen alias ni nuevo nombre, luego
+estas columnas no pueden referenciarse.
+Las opciones de duplicados en campos únicos (claves primarias o unique) permiten indicar que hacer
+si hay un valor repetido en ese campo. Si no se indica nada se producirá un error. Para evitar esto
+errores podemos especificar una de las dos opciones IGNORE que ignora la fila y no la graba y
+REPLACE que reemplaza la fila por la anterior.
+La nueva tabla creada no hereda las CONSTRAINTS que tenga asignada la tabla origen. Esto es para dar
+más flexibilidad al sistema. Si se desea que la nueva tabla tenga constraints deben indicarse en la
+creación o añadirse posteriormente con ALTER TABLE. Es importante recordarlo para que la nueva tabla
+quede con la definición completa.
+
+Página: 70
+Al crear la nueva tabla además se insertan las filas correspondientes de la tabla resultado de la sentencia
+select en la instrucción de creación.
+1.2 – Ejemplos de la creación de una tabla a partir de una selección
+de otra tabla.
+1. Crear una tabla de vendedores seleccionando éstos de la tabla de empleados.
+mysql> CREATE TABLE vendedores
+-> SELECT *
+-> FROM empleados
+-> WHERE oficio = 'VENDEDOR';
+Query OK, 3 rows affected (0.13 sec)
+Records: 3 Duplicates: 0 Warnings: 0
+mysql> SELECT * FROM vendedores;
++ + + + + + + + +
+| EMP_NO | APELLIDO | OFICIO |DIRECTOR | FECHA_ALTA | SALARIO | COMISION | DEP_NO|
++ + + + + + + + +
+| 7499 | ALONSO | VENDEDOR| 7698 | 1981-02-23 | 1400.00 | 650.00 | 30 |
+| 7654 | MARTIN | VENDEDOR| 7698 | 1981-09-28 | 1500.00 | 1850.00 | 30 |
+| 7844 | CALVO | VENDEDOR| 7698 | 1981-09-08 | 1800.00 | 250.00 | 30 |
++ + + + + + + + +
+3 rows in set (0.00 sec)
+2. Crear una nueva tabla sólo con los nombres y números de los departamentos a partir de la tabla ya
+creada con los mismos.
+mysql> CREATE TABLE nombres_dep (depart_no INT(4),
+
+nombre VArchar(10))
+-> SELECT dep_no, dnombre
+-> FROM departamentos;
+Query OK, 4 rows affected (0.23 sec)
+Records: 4 Duplicates: 0 Warnings: 0
+mysql> SELECT * FROM nombres_dep;
++--------+---------------+
+| dep_no | dnombre |
++--------+---------------+
+| 10 | CONTABILIDAD |
+| 20 | INVESTIGACION |
+| 30 | VENTAS |
+| 40 | PRODUCCION |
++--------+---------------+
+4 rows in set (0.00 sec)
+
+Página: 71
+
+INSERT INTO NombreTabla [( NombreColumna [,NombreColumna...] ) ]
+SELECT FormatoSelect
+
+2 - Actualización de una tabla a partir de una subconsulta
+Todas las instrucciones de actualización de datos que hemos visto pueden ampliarse con la
+utilización de subconsultas dentro de ellas.
+2.1- Inserciones con subconsultas
+Podemos insertar en una tabla el resultado de una consulta sobre otra tabla. En este caso normalmente se
+insertarán varias filas con una sola sentencia. Utilizaremos el siguiente formato:
+
+Notación: la lista de columnas en las que insertamos va es opcional, por lo que va entre
+corchetes.
+
+En el formato anterior podemos destacar:
+ La lista de columnas es opcional pero deberá especificarse cuando las columnas que devuelve la
+consulta no coinciden en número o en orden con las columnas de la tabla destino.
+ La consulta puede ser cualquier comando de selección válido siempre que exista una
+correspondencia entre las columnas devueltas y las columnas de la tabla destino, o la lista de columnas.
+En este caso existe correspondencia en número y en orden entre las columnas de la tabla destino y las
+columnas de la selección; por tanto, no hace falta especificar la lista de columnas y el comando requerido
+será:
+mysql> INSERT INTO departamentos2
+-> SELECT * FROM departamentos
+-> WHERE LENGTH(dnombre)> 8;
+Query OK, 3 rows affected (0.05 sec)
+Records: 3 Duplicates: 0 Warnings: 0
+mysql> SELECT *
+-> FROM departamentos2;
++--------+---------------+-----------+
+| DEP_NO | DNOMBRE | LOCALIDAD |
++--------+---------------+-----------+
+| 10 | CONTABILIDAD | BARCELONA |
+| 20 | INVESTIGACION | VALENCIA |
+| 40 | PRODUCCION | SEVILLA |
++--------+---------------+-----------+
+3 rows in set (0.00 sec)
+Si la tabla destino tuviese una estructura diferente deberemos forzar la correspondencia, bien al
+especificar la lista de selección, bien especificando la lista de columnas, o bien utilizando ambos recursos.
+Por ejemplo, supongamos que la tabla destino es n2dep
+mysql> CREATE TABLE n2dept
+
+Página: 72
+
+-> ( DEP_NO INT(2),
+-> NOMBRE VARCHAR(14),
+-> CONSTRAINT PK_DEPARTAMENTOS_DEP_NO PRIMARY KEY (DEP_NO)
+-> );
+
+Query OK, 0 rows affected (0.52 sec)
+En este caso procederemos:
+mysql> INSERT INTO n2dept
+-> SELECT dep_no, dnombre FROM departamentos
+-> WHERE LENGTH(dnombre)> 8;
+Query OK, 3 rows affected (0.40 sec)
+Records: 3 Duplicates: 0 Warnings: 0
+mysql> SELECT *
+-> FROM n2dept;
++--------+---------------+
+| DEP_NO | NOMBRE |
++--------+---------------+
+| 10 | CONTABILIDAD |
+| 20 | INVESTIGACION |
+| 40 | PRODUCCION |
++--------+---------------+
+3 rows in set (0.00 sec)
+
+2.2 – Modificaciones con subconsultas
+En ocasiones la condición que deben cumplir las filas que deseamos modificar implica realizar una
+subconsulta a otras tablas. En estos casos se incluirá la subconsulta en la condición y los operadores
+necesarios tal como estudiamos en el apartado correspondiente del tema SUBCONSULTAS. La
+subconsulta estará en la cláusula WHERE.
+Esta subconsulta tiene las siguientes limitaciones:
+ La tabla destino no puede aparecer en la consulta.
+ No se puede incluir una cláusula ORDER BY en la consulta.
+Por ejemplo, supongamos que se desea elevar en 500 Euros. el salario de todos los empleados cuyo
+departamento no esté en MADRID
+mysql> UPDATE empleados
+-> SET salario = salario + 500
+-> WHERE dep_no NOT IN (SELECT dep_no
+-> FROM departamentos
+-> WHERE localidad <> 'MADRID');
+Query OK, 4 rows affected (0.05 sec)
+Rows matched: 4 Changed: 4 Warnings: 0
+
+2.3 – Eliminaciones con subconsultas
+En ocasiones la condición que deben cumplir las filas que deseamos eliminar implica realizar una
+subconsulta a otras tablas. En estos casos se incluirá la subconsulta en la condición y los operadores
+necesarios tal como estudiamos en el apartado correspondiente del tema subconsultas. Ésta aparecerá en
+
+Página: 73
+
+la cláusula WHERE con las mismas restricciones que en las modificaciones:
+ La tabla destino no puede aparecer en la consulta.
+ No se puede incluir una cláusula ORDER BY en la consulta.
+Supongamos que queremos eliminar de la tabla departamentos aquellos que no tienen ningún
+empleado.
+
+mysql> DELETE FROM departamentos
+-> WHERE dep_no NOT IN
+
+(SELECT DISTINCT dep_no FROM empleados);
+
+Query OK, 1 row affected (0.02 sec)
+mysql> SELECT *
+-> FROM departamentos;
++--------+---------------+-----------+
+| DEP_NO | DNOMBRE | LOCALIDAD |
++--------+---------------+-----------+
+| 10 | CONTABILIDAD | BARCELONA |
+| 20 | INVESTIGACION | VALENCIA |
+| 30 | VENTAS | MADRID |
++--------+---------------+-----------+
+3 rows in set (0.00 sec)
+
+El siguiente ejemplo eliminará los departamentos que tienen menos de tres empleados.
+Nota: esta orden la ejecutamos con las tablas departamentos2 y empleados2 que tiene borrado en
+cascada (con empleados y departamentos no sería posible por la restricción de integridad)
+mysql> DELETE FROM departamentos2
+-> WHERE dep_no IN (SELECT dep_no
+-> FROM empleados2
+-> GROUP BY dep_no
+-> HAVING count(*) < 3);
+Query OK, 1 row affected (0.39 sec)
+mysql> SELECT *
+-> FROM departamentos2;
++--------+--------------+-----------+
+| DEP_NO | DNOMBRE | LOCALIDAD |
++--------+--------------+-----------+
+| 10 | CONTABILIDAD | BARCELONA |
+| 30 | VENTAS | MADRID |
+| 40 | PRODUCCION | SEVILLA |
++--------+--------------+-----------+
+3 rows in set (0.00 sec)
+El ejemplo anterior borrará los departamentos que tengan menos de tres empleados pero, para que
+entre en la lista de selección, el departamento deberá tener al menos un empleado. Por tanto, los
+empleados que no tengan ningún empleado no se borrarán. Para evitar esto podemos cambiar la
+condición indicando que se borren aquellos departamentos que no están en la lista de departamentos
+con tres o más empleados.
+mysql> DELETE FROM departamentos2
+-> WHERE dep_no NOT IN (SELECT dep_no
+-> FROM empleados2
+
+Página: 74
+
+-> GROUP BY dep_no
+-> HAVING count(*) >= 3);
+Query OK, 2 rows affected (0.12 sec)
+mysql> SELECT *
+-> FROM departamentos2;
++ + + +
+| DEP_NO | DNOMBRE | LOCALIDAD |
++ + + +
+| 10 | CONTABILIDAD | BARCELONA |
+| 30 | VENTAS | MADRID |
++ + + +
+2 rows in set (0.00 sec)
+Esta última orden borrará todos los departamentos que tienen: ninguno, uno o dos empleados.
+Se pueden utilizar subconsultas anidadas a varios niveles, pero respetando la siguiente restricción: la
+tabla destino no puede aparecer en la cláusula FROM de ninguna de las subconsultas que
+intervienen en la selección. Si se permiten referencias externas, como en el siguiente ejemplo:
+mysql> DELETE FROM departamentos
+-> WHERE NOT EXISTS (SELECT *
+-> FROM empleados
+-> WHERE empleados.dep_no=departamentos.dep_no);
+Query OK, 0 rows affected (0.00 sec)
+En estos casos la subconsulta con la referencia externa realiza la selección sobre la tabla destino
+antes de que se elimine ninguna fila.
+Nota: debe tenerse en cuenta que algunos productos comerciales permiten saltar esta restricción pero
+otros no.
+
+Página: 75
+
+CREATE VIEW NombreVista
+
+[(DefiniciónColumna [,DefiniciónColumna....] )]
+
+AS Consulta;
+
+3 - Vistas
+Podemos definir una vista como una consulta almacenada en la base de datos que se utiliza como una
+tabla virtual. Se define asociadas a una o varias tablas y no almacena los datos sino que trabaja sobre los
+datos de las tablas sobre las que está definida, estando así en todo momento actualizada.
+3.1 - ¿Qué son las vistas y para qué sirven?.
+Se trata de una perspectiva de la base de datos o ventana que permite a uno o varios usuarios ver
+solamente las filas y columnas necesarias para su trabajo.
+Entre las ventajas que ofrece la utilización de vistas cabe destacar:
+ Seguridad y confidencialidad: ya que la vista ocultará los datos confidenciales o aquellos para los que
+el usuario no tenga permiso.
+ Comodidad: ya que solamente muestra los datos relevantes, permitiendo, incluso trabajar con
+agrupaciones de filas como si se tratase de una única fila o con composiciones de varias tablas como si
+se tratase de una única tabla.
+ Independencia respecto a posibles cambios en los nombres de las columnas, de las tablas, etcétera.
+Por ejemplo, la siguiente consulta permite al departamento de VENTAS realizar la gestión de sus
+empleados ocultando la información relativa a los empleados de otros departamentos.
+SELECT *
+FROM EMPLEADOS
+WHERE dep_no=30;
+La siguiente consulta permite a cualquier empleado de la empresa obtener información no confidencial de
+cualquier otro empleado ocultando las columnas SALARIO y COMISION:
+SELECT emp_no, apellido, oficio, director, fecha_alta, dep_no FROM
+empleados;
+Para ello crearemos vistas y permitiremos a los usuarios tener acceso a las vistas sin tenerlo de la tabla
+completa.
+3.2 - Creación y utilización de vistas
+Como hemos dicho son tablas virtuales resultado de una consulta realizadas sobre tablas ya existentes.
+Las vistas no ocupan espacio en la base de datos ya que lo único que se almacena es la definición de la
+vista. El gestor de la base de datos se encargará de comprobar los comandos SQL que hagan referencia a
+la vista, transformándolos en los comandos correspondientes referidos a las tablas originales, todo ello de
+forma transparente para el usuario.
+3.2.1 – Formato de la creación de vistas.
+Para crear una vista se utiliza el comando CREATE VIEW según el siguiente formato genérico:
+
+Página: 76
+
+Notación: la lista de columnas que define las columnas de la vista es opcional.
+donde NombreVista... ......................es el nombre que tendrá la vista que se va a crear.
+DefinicionColumnas.......... permite especificar un nombre y su correspondiente tipo para
+
+cada columna de la vista.
+Si no se especifica, cada columna quedará con el nombre o el
+alias correspondiente y el tipo asignado por la consulta.
+
+Consulta................................. en una consulta cuyo resultado formará la vista.
+El siguiente ejemplo crea la vista emple_dep30 para la gestión de los empleados del departamento 30
+mencionada en el apartado anterior.
+mysql> CREATE VIEW emple_dep30 AS
+-> SELECT * FROM EMPLEADOS
+-> WHERE DEP_NO = 30;
+Query OK, 0 rows affected (0.55 sec)
+CREATE VIEW emple_dep30 AS
+SELECT * FROM EMPLEADOS
+WHERE DEP_NO = 30;
+A continuación se muestra la sentencia que crea la vista datos_emple que contiene información de
+todos los empleados ocultando la información confidencial.
+mysql> CREATE VIEW datos_emple AS
+-> SELECT emp_no, apellido, oficio, director,
+
+fecha_alta, dep_no
+
+-> FROM empleados;
+Query OK, 0 rows affected (0.00 sec)
+Las vistas pueden a su vez definirse sobre otras vistas. Si ya tenemos creada las vista datos_emple,
+podríamos crear otra vista sobre ella:
+mysql> CREATE VIEW datos_emple_10 AS
+-> SELECT *
+-> FROM datos_emple
+-> WHERE dep_no=10;
+Query OK, 0 rows affected (0.00 sec)
+3.2.2 – Utilización de vistas
+Una vez definida puede ser utilizada para consultas de igual forma que una tabla.
+Con algunas restricciones, todos los formatos de selección vistos para las tablas son aplicables para la
+selección de filas en las vistas.
+Por ejemplo:
+mysql> SELECT * FROM datos_emple;
++ + + + + + +
+| emp_no | apellido | oficio | director | fecha_alta | dep_no |
+
+Página: 77
+
++ + + + + + +
+| 7499 | ALONSO | VENDEDOR | 7698 | 1981-02-23 | 30 |
+| 7521 | LOPEZ | EMPLEADO | 7782 | 1981-05-08 | 10 |
+| 7654 | MARTIN | VENDEDOR | 7698 | 1981-09-28 | 30 |
+| 7698 | GARRIDO | DIRECTOR | 7839 | 1981-05-01 | 30 |
+| 7782 | MARTINEZ | DIRECTOR | 7839 | 1981-06-09 | 10 |
+| 7839 | REY | PRESIDENTE| NULL | 1981-11-17 | 10 |
+| 7844 | CALVO | VENDEDOR | 7698 | 1981-09-08 | 30 |
+| 7876 | GIL | ANALISTA | 7782 | 1982-05-06 | 20 |
+| 7900 | JIMENEZ | EMPLEADO | 7782 | 1983-03-24 | 20 |
++ + + + + + +
+9 rows in set (0.01 sec)
+También podemos seleccionar solo algunas columnas y poner una condición
+mysql> SELECT apellido, director
+-> FROM datos_emple
+-> WHERE oficio = 'VENDEDOR';
++----------+----------+
+| apellido | director |
++----------+----------+
+| ALONSO | 7698 |
+| MARTIN | 7698 |
+| CALVO | 7698 |
++----------+----------+
+3 rows in set (0.00 sec)
+Pero debe tenerse en cuenta que si al definir la vista hemos indicado nuevos nombres para columnas
+y expresiones si podremos hacer referencia a ellos en las sentencias de selección, pero si hemos
+omitido la definición de las columnas y en la sentencia de creación hemos realizado la selección de
+todas las columnas (creada con select *) solo puede hacerse una selección de todas las columnas de
+la vista (con *)
+La vista emple_dep30 la creamos sin especificar nuevo nombre para las columnas de la vista y con
+una sentencia select *. Podemos obtener los datos de la vista si escribimos:
+mysql> SELECT * FROM emple_dep30;
++ + + + + + + + +
+|EMP_NO | APELLIDO | OFICIO |DIRECTOR | FECHA_ALTA | SALARIO |COMISION| DEP_NO |
++ + + + + + + + +
+| 7499 | ALONSO | VENDEDOR| 7698 | 1981-02-23 | 1400.00 | 400.00 | 30 |
+| 7654 | MARTIN | VENDEDOR| 7698 | 1981-09-28 | 1500.00 |1600.00 | 30 |
+| 7698 | GARRIDO | DIRECTOR| 7839 | 1981-05-01 | 3850.12 | NULL | 30 |
+| 7844 | CALVO | VENDEDOR| 7698 | 1981-09-08 | 1800.00 | 0.00 | 30 |
++ + + + + + + + +
+4 rows in set (0.06 sec)
+Pero no podemos referenciar las columnas en la selección al recuperar datos de la vista:
+mysql> SELECT apellido FROM emple_dep30;
+ERROR 1054 (42S22): Unknown column 'apellido' in 'field list'
+
+Página: 78
+
+3.2.3 - Restricciones para la creación y utilización de vistas
+No se puede usar la cláusula ORDER BY en la creación de una vista ya que las filas de una tabla no están
+ordenadas (la vista es una tabla virtual). No obstante, si se puede utilizar dicha cláusula a la hora de
+recuperar datos de la vista.
+Es obligatorio especificar la lista de nombres de columnas de la vista o un alias cuando la consulta
+devuelve funciones de agrupamiento como SUM, COUNT, etcétera y posteriormente quiere hacerse
+referencia a ellas.
+Pueden utilizarse funciones de agrupación sobre columnas de vistas que se basan a su vez en funciones de
+agrupación lo que permite resolver los casos en los que un doble agrupamiento que no está permitido por el
+estándar. Así creamos una vista con una primera función de agrupación y sobre ella aplicamos la segunda
+función de agrupación, obteniendo el resultado deseado.
+3.2.4 - Ejemplos creación y utilización de vistas
+Como hemos dicho una vez creada la vista se puede utilizar como si se tratase de una tabla (observando
+las restricciones anteriores). Veamos lo que podemos hacer con las vistas con los ejemplos.
+1- El siguiente ejemplo crea la vista datos_vendedores que muestra solamente las columnas emp_no,
+apellido, director, fecha_alta, dep_no, de aquellos empleados cuyo oficio es VENDEDOR.
+mysql> CREATE VIEW datos_vendedores
+-> (num_vendedor, apellido, director, fecha_alta, dep_no) AS
+-> SELECT emp_no, apellido, director, fecha_alta, dep_no
+-> FROM empleados
+-> WHERE oficio = 'VENDEDOR';
+Query OK, 0 rows affected (0.00 sec)
+Los datos accesibles mediante la vista creada serán:
+mysql> SELECT *
+-> FROM datos_vendedores;
++ + + + + +
+| num_vendedor | apellido | director | fecha_alta | dep_no |
++ + + -+ + +
+| 7499 | ALONSO | 7698 | 1981-02-23 | 30 |
+| 7654 | MARTIN | 7698 | 1981-09-28 | 30 |
+| 7844 | CALVO | 7698 | 1981-09-08 | 30 |
++ + + + + +
+3 rows in set (0.02 sec)
+2- También se pueden crear vistas a partir de consultas que incluyen agrupaciones, como en el siguiente
+ejemplo:
+mysql> CREATE VIEW resumen_dep1
+-> (dep_no, num_empleados, suma_salario, suma_comision) AS
+-> SELECT dep_no, COUNT(emp_no), SUM(salario),
+
+SUM(IFNULL(comision,0))
+
+-> FROM empleados
+-> GROUP BY dep_no;
+Query OK, 0 rows affected (0.01 sec)
+
+Página: 79
+En estos casos, cada fila de la vista corresponderá a varias filas en la tabla original tal como se puede
+comprobar en la siguiente consulta:
+mysql> SELECT *
+-> FROM resumen_dep1;
++--------+---------------+--------------+---------------+
+| dep_no | num_empleados | suma_salario | suma_comision |
++--------+---------------+--------------+---------------+
+| 10 | 3 | 9800.50 | 0.00 |
+| 20 | 2 | 4750.00 | 0.00 |
+| 30 | 4 | 8550.12 | 2000.00 |
++--------+---------------+--------------+---------------+
+3 rows in set (0.02 sec)
+Normalmente la mayoría de las columnas de este tipo de vistas corresponden a funciones de columna
+tales como SUM, AVERAGE, MAX, MIN, etcétera. Por ello el estándar SQL establece en estos casos la
+obligatoriedad de especificar la lista de columnas o de alias si posteriormente quiere hacerse referencia a
+ellas. Aunque algunos gestores de bases de datos permiten saltar esta restricción. No es aconsejable ya
+que las columnas correspondientes de la vista quedarán con nombres como COUNT(EMP_NO),
+SUM(SALARIO), SUM(COMISION) lo cual no resulta operativo para su posterior utilización.
+mysql> SELECT dep_no, num_empleados, suma_salario
+-> FROM resumen_dep1;
++--------+---------------+--------------+
+| dep_no | num_empleados | suma_salario |
++--------+---------------+--------------+
+| 10 | 3 | 9800.50 |
+| 20 | 2 | 4750.00 |
+| 30 | 4 | 8550.12 |
++--------+---------------+--------------+
+3 rows in set (0.14 sec)
+
+3- Sobre esta vista, con una función de agrupación, podemos hacer otra función de agrupación, por
+ejemplo obtener el departamento con mayor suma de salarios para sus empleados:
+Creamos la vista resumen_dep2 con dos totales resultado e aplicar funciones de grupo
+mysql> CREATE VIEW resumen_dep2
+-> AS SELECT dep_no, COUNT(emp_no) "num_empleados",
+SUM(salario) "suma_salario",
+-> FROM empleados
+-> GROUP BY dep_no;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT dep_no, num_empleados, suma_salario
+-> FROM resumen_dep2;
++ + + +
+| dep_no | num_empleados | suma_salario |
++ + + +
+| 10 | 3 | 9800.50 |
+
+Página: 80
+
+| 20 | 2 | 4750.00 |
+| 30 | 4 | 8550.12 |
++ + + +
+3 rows in set (0.00 sec)
+Y sobre ella volvemos a aplicar una función de grupo para hallar el máximo de las sumas de los
+salarios
+mysql> SELECT MAX(suma_salario)
+-> FROM resumen_dep2;
++-------------------+
+| MAX(suma_salario) |
++-------------------+
+| 9800.50 |
++-------------------+
+1 row in set (0.00 sec)
+Y también podemos obtener el departamento el que pertenece este salario máximo
+mysql> SELECT dep_no, dnombre
+-> FROM departamentos
+-> WHERE dep_no = (SELECT dep_no
+-> FROM resumen_dep2
+-> WHERE suma_salario=(SELECT MAX(suma_salario)
+-> FROM resumen_dep2));
++--------+--------------+
+| dep_no | dnombre |
++--------+--------------+
+| 10 | CONTABILIDAD |
++--------+--------------+
+1 row in set (0.00 sec)
+4 –Así mismo, se pueden crear vistas que incluyan todas o varias de las posibilidades estudiadas. Por
+ejemplo la siguiente vista permite trabajar con datos de dos tablas, agrupados y seleccionando las filas
+que interesan (en este caso todos los departamentos que tengan más de dos empleados):
+mysql> CREATE VIEW resumen_emp_dep
+-> (departamento, num_empleados, suma_salario) AS
+-> SELECT dnombre, COUNT(emp_no), SUM(salario)
+-> FROM empleados, departamentos
+-> WHERE empleados.dep_no = departamentos.dep_no
+-> GROUP BY empleados.dep_no,dnombre
+-> HAVING COUNT(*) > 2;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT departamento, num_empleados
+-> FROM resumen_emp_dep;
++--------------+---------------+
+| departamento | num_empleados |
++--------------+---------------+
+| CONTABILIDAD | 3 |
+| VENTAS | 4 |
++--------------+---------------+
+2 rows in set (0.02 sec)
+
+Página: 81
+
+DROP VIEW [IF EXISTS] NombreVista
+[RESTRICT | CASCADE ]
+3.3 - Eliminación de vistas
+3.3.1 - Formato de borrado de vistas
+La sentencia DROP VIEW permite eliminar la definición de una vista.
+
+La cláusula IF EXISTS previene los errores que puedan producirse si no existe la tabla que queremos
+borrar
+La cláusula CASCADE Y RESTRICT están permitidas pero no implementada en la versión 5.
+3.3.2 - Ejemplos de borrado de vistas
+mysql> DROP VIEW IF EXISTS resumen_emp_dep;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+3.3.3 - Borrado de las tablas o vistas asociadas a una vista
+Si se borran las tablas a las vistas sobre las que están definidas las vistas la vista se queda invalida
+(no se borra su definición pero no está utilizable).
+mysql> SELECT *
+-> FROM datos_emple_10;
++ + + + + +--------+
+| emp_no | apellido | oficio | director | fecha_alta | dep_no |
++ + + + + +--------+
+| 7521 | LOPEZ | EMPLEADO | 7782 | 1981-05-08 | 10 |
+| 7782 | MARTINEZ | DIRECTOR | 7839 | 1981-06-09 | 10 |
+| 7839 | REY | PRESIDENTE | NULL | 1981-11-17 | 10 |
++ + + + + +--------+
+3 rows in set (0.05 sec)
+Si borramos datos_emple sobre la que está definida datos_emple_10 esta pasará a estar
+inválida.
+mysql> DROP VIEW IF EXISTS datos_emple;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT *
+-> FROM datos_emple_10;
+ERROR 1356 (HY000): View 'test.datos_emple_10' references invalid
+table(s) or column(s)

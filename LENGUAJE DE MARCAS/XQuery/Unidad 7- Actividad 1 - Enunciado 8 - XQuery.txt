@@ -1,0 +1,101 @@
+a) Obtener todos los títulos.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+return data($v/titulo)
+
+b) Obtener todos los videojuegos.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+return $v
+
+c) Obtener todos los precios.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+return data($v/precio)
+
+d) Obtener todos los atributos id.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+return data($v/@id
+
+e) Obtener todos los desarrolladores.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+return data($v/desarrollador)
+
+f) Videojuegos con precio mayor de 50.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/precio > 50
+return $v
+
+g) Títulos de videojuegos con stock mayor a 10.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/stock > 10
+return data($v/titulo)
+
+h) Videojuegos sin stock.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/stock = 0
+return $v
+
+i) Títulos de videojuegos de PlayStation 5.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/plataforma = "PlayStation 5"
+return data($v/titulo)
+
+j) Precio del videojuego con id="v3".
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/@id = "v3"
+return data($v/precio)
+
+k) Videojuegos cuyo precio es menor de 50 y con stock disponible.
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/precio < 50 and $v/stock > 0
+return $v
+
+l) Obtener el videojuego más caro.
+
+SOLUCION:
+let $max_precio := max(doc("tienda.xml")/tienda/videojuego/precio)
+for $v in doc("tienda.xml")/tienda/videojuego
+where $v/precio = $max_precio
+return $v
+
+m) Obtener el primer videojuego.
+
+SOLUCION:
+for $v at $posicion in doc("tienda.xml")/tienda/videojuego
+where $posicion = 1
+return $v
+
+n) Obtener el último videojuego.
+
+SOLUCION:
+let $total := count(doc("tienda.xml")/tienda/videojuego)
+for $v at $posicion in doc("tienda.xml")/tienda/videojuego
+where $posicion = $total
+return $v
+
+o) Obtener títulos ordenados por precio (concepto teórico).
+
+SOLUCION:
+for $v in doc("tienda.xml")/tienda/videojuego
+order by xs:decimal($v/precio) ascending
+return data($v/titulo)
